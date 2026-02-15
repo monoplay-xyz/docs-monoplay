@@ -197,9 +197,9 @@ MonoPlay uses the **GRID network** (torrent-based distribution) for downloads:
 5. **Assemble Game:** Once complete, the launcher unpacks and installs the game
 
 **Typical Download Speeds:**
-- Small games (<5GB): 2-5 minutes
-- Medium games (5-20GB): 10-30 minutes
-- Large games (50GB+): 30-90 minutes
+- Small games (under 5 GB): 2-5 minutes
+- Medium games (5-20 GB): 10-30 minutes
+- Large games (50 GB+): 30-90 minutes
 
 *Speed depends on available seeders and your internet connection.*
 

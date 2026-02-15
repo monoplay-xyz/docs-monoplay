@@ -244,7 +244,7 @@ monoplay-cli package --binary target/release/my-game --assets assets/
 3. Submit for security review
 4. Go live once approved
 
-[Learn more about the SDK →](/forge/sdk-overview)
+[Learn more about the SDK →](../sdk/overview.md)
 
 ---
 
@@ -381,18 +381,18 @@ Visit `http://localhost:8080` in your browser to see:
 ### For Players
 - [Explore payment options](/platform/payments)
 - [Understand licenses](/platform/licenses)
-- [Join the community](/community)
+- [Join the community](https://discord.gg/monoplay)
 
 ### For Developers
-- [Forge AI Builder Tutorial](/forge/ai-builder)
-- [Bevy SDK Reference](/forge/sdk-reference)
+- [Forge AI Builder Tutorial](../forge/overview.md)
+- [Bevy SDK Reference](../sdk/overview.md)
 - [Publishing Guidelines](/forge/publishing)
 
 ### For Node Operators
-- [Optimize earnings](/grid/optimization)
-- [Troubleshooting guide](/grid/troubleshooting)
+- [Optimize earnings](../grid/rewards.md)
+- [Troubleshooting guide](../grid/faq.md)
 - [Node operator rewards breakdown](/grid/rewards)
 
 ---
 
-Need help? Check the [FAQ](/faq) or join [Discord](https://discord.gg/monoplay).
+Need help? Check the [FAQ](../reference/faq.md) or join [Discord](https://discord.gg/monoplay).

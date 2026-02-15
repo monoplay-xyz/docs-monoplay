@@ -596,6 +596,6 @@ fn check_zone_access(
 
 ## Next Steps
 
-- [Core Plugin](/docs/sdk/core) - Save blockchain state
-- [UI Plugin](/docs/sdk/ui) - Wallet connection UI
-- [Multiplayer](/docs/sdk/multiplayer) - On-chain leaderboards
+- [Core Plugin](./core.md) - Save blockchain state
+- [UI Plugin](./ui.md) - Wallet connection UI
+- [Multiplayer](./multiplayer.md) - On-chain leaderboards

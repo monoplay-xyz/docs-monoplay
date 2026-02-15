@@ -266,7 +266,7 @@ Games remain signed and functional. You can delist games but cannot remove exist
 
 ### Does signing affect game performance?
 
-No. Code signing adds minimal overhead (typically <1% startup time increase). No runtime performance impact.
+No. Code signing adds minimal overhead (typically under 1% startup time increase). No runtime performance impact.
 
 ## Best Practices
 

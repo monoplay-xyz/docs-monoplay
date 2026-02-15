@@ -521,6 +521,6 @@ fn validate_player_movement(
 
 ## Next Steps
 
-- [Physics](/docs/sdk/physics) - Server-side physics simulation
-- [Core Plugin](/docs/sdk/core) - State synchronization
-- [Input System](/docs/sdk/input) - Input buffering
+- [Physics](./physics.md) - Server-side physics simulation
+- [Core Plugin](./core.md) - State synchronization
+- [Input System](./input.md) - Input buffering

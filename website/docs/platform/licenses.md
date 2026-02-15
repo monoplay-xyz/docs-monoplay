@@ -436,4 +436,4 @@ No, MonoPlay licenses are global. However, some games may have regional restrict
 
 ---
 
-Questions? Visit the [FAQ](/faq) or [contact support](/support).
+Questions? Visit the [FAQ](../reference/faq.md) or [contact support](../reference/faq.md).

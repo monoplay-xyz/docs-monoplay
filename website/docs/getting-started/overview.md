@@ -153,4 +153,4 @@ Ready to dive in? Choose your next step:
 
 ---
 
-Have questions? Check out our [FAQ](/faq) or join the [Discord community](https://discord.gg/monoplay).
+Have questions? Check out our [FAQ](../reference/faq.md) or join the [Discord community](https://discord.gg/monoplay).

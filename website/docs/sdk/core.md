@@ -310,6 +310,6 @@ fn on_save(mut events: EventReader<SaveEvent>) {
 
 ## Next Steps
 
-- [Input System](/docs/sdk/input) - Handle player input
-- [UI Plugin](/docs/sdk/ui) - Build menus and HUD
-- [Physics](/docs/sdk/physics) - Add character movement
+- [Input System](./input.md) - Handle player input
+- [UI Plugin](./ui.md) - Build menus and HUD
+- [Physics](./physics.md) - Add character movement

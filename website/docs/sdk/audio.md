@@ -513,6 +513,6 @@ fn setup_mobile_audio(mut commands: Commands) {
 
 ## Next Steps
 
-- [UI Plugin](/docs/sdk/ui) - UI sound effects
-- [Core Plugin](/docs/sdk/core) - Audio settings persistence
-- [World Plugin](/docs/sdk/world) - Environmental audio
+- [UI Plugin](./ui.md) - UI sound effects
+- [Core Plugin](./core.md) - Audio settings persistence
+- [World Plugin](./world.md) - Environmental audio

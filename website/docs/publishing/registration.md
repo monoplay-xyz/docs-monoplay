@@ -176,7 +176,7 @@ If you can't connect your wallet:
 - Ensure you're on the Monolythium network
 - Clear browser cache and try again
 - Try a different wallet or browser
-- Check the [Developer FAQ](../developers/overview.md#faq)
+- Check the [Developer FAQ](../reference/faq.md)
 
 ## Publisher Support
 

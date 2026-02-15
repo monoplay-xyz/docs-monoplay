@@ -69,8 +69,8 @@ A decentralized content delivery network (CDN) powered by community-run nodes. G
 Choose your path:
 
 - **Players**: [Create an account](/getting-started/create-account) and start exploring games
-- **Developers**: Jump into [MonoPlay Forge](/forge/quick-start) or use our [SDK documentation](/forge/sdk-overview)
-- **Node Operators**: [Set up a GRID node](/grid/setup) and start earning rewards
+- **Developers**: Jump into [MonoPlay Forge](./forge/getting-started.md) or use our [SDK documentation](./sdk/overview.md)
+- **Node Operators**: [Set up a GRID node](./grid/getting-started.md) and start earning rewards
 
 ## Token Information
 
@@ -78,7 +78,7 @@ Choose your path:
 
 - **Symbol**: LYTH
 - **Use Cases**: Game purchases, developer payouts, GRID node rewards
-- **Get LYTH**: [See supported exchanges and wallets](/getting-started/create-account#getting-lyth-tokens)
+- **Get LYTH**: [See supported exchanges and wallets](./getting-started/create-account.md#step-4-getting-lyth-tokens)
 
 ## Community & Support
 

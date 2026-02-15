@@ -240,4 +240,4 @@ Now that your account is set up:
 
 ---
 
-Need help? Visit our [support center](/support) or ask in the [Discord community](https://discord.gg/monoplay).
+Need help? Visit our [FAQ](../reference/faq.md) or ask in the [Discord community](https://discord.gg/monoplay).

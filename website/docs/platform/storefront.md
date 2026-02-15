@@ -437,4 +437,4 @@ The MonoPlay storefront is fully responsive:
 
 ---
 
-Have questions? Check the [FAQ](/faq) or contact [support](/support).
+Have questions? Check the [FAQ](../reference/faq.md) or contact [support](../reference/faq.md).

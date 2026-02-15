@@ -395,6 +395,6 @@ fn player_actions(
 
 ## Next Steps
 
-- [Physics](/docs/sdk/physics) - Character controllers
-- [UI Plugin](/docs/sdk/ui) - Input-driven menus
-- [Core Plugin](/docs/sdk/core) - State management
+- [Physics](./physics.md) - Character controllers
+- [UI Plugin](./ui.md) - Input-driven menus
+- [Core Plugin](./core.md) - State management

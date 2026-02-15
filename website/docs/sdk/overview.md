@@ -55,7 +55,7 @@ Voxel-based world generation with chunk streaming, block type systems, and proce
 
 ## Integration with MonoPlay Forge
 
-Games created with [MonoPlay Forge](/docs/forge/getting-started) automatically include the SDK plugins. The Forge templates are pre-configured with sensible defaults, but all SDK features remain accessible for customization.
+Games created with [MonoPlay Forge](../forge/getting-started.md) automatically include the SDK plugins. The Forge templates are pre-configured with sensible defaults, but all SDK features remain accessible for customization.
 
 ## Design Philosophy
 
@@ -69,7 +69,7 @@ The MonoPlay SDK follows these principles:
 
 ## Getting Started
 
-To start using the SDK, see the [Installation Guide](/docs/sdk/installation). For detailed usage of each plugin, refer to the individual crate documentation pages.
+To start using the SDK, see the [Installation Guide](./installation.md). For detailed usage of each plugin, refer to the individual crate documentation pages.
 
 ## Platform Support
 

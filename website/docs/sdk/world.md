@@ -622,6 +622,6 @@ fn generate_chunks_async(
 
 ## Next Steps
 
-- [Physics](/docs/sdk/physics) - Voxel collision detection
-- [Multiplayer](/docs/sdk/multiplayer) - Synchronize block changes
-- [Core Plugin](/docs/sdk/core) - World save/load system
+- [Physics](./physics.md) - Voxel collision detection
+- [Multiplayer](./multiplayer.md) - Synchronize block changes
+- [Core Plugin](./core.md) - World save/load system

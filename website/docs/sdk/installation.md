@@ -178,9 +178,9 @@ All SDK crates include integration tests to verify correct setup.
 
 ## Next Steps
 
-- [Core Plugin](/docs/sdk/core) - Application state and asset management
-- [Input System](/docs/sdk/input) - Action-based input handling
-- [Physics](/docs/sdk/physics) - Character controllers and collision
+- [Core Plugin](./core.md) - Application state and asset management
+- [Input System](./input.md) - Action-based input handling
+- [Physics](./physics.md) - Character controllers and collision
 
 ## Troubleshooting
 

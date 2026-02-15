@@ -461,6 +461,6 @@ fn spatial_query(query: Res<SpatialQuery>) {
 
 ## Next Steps
 
-- [Input System](/docs/sdk/input) - Connect input to movement
-- [Core Plugin](/docs/sdk/core) - State management
-- [World Plugin](/docs/sdk/world) - Voxel physics integration
+- [Input System](./input.md) - Connect input to movement
+- [Core Plugin](./core.md) - State management
+- [World Plugin](./world.md) - Voxel physics integration

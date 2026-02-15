@@ -94,7 +94,7 @@ Cart Total:
 - Wallet connected to Monolythium network
 
 **How to get LYTH:**
-See [Getting LYTH Tokens](/getting-started/create-account#getting-lyth-tokens)
+See [Getting LYTH Tokens](../getting-started/create-account.md#step-4-getting-lyth-tokens)
 
 **Advantages:**
 - Instant payment
@@ -446,4 +446,4 @@ Developers can set different prices for different regions:
 
 ---
 
-Questions about payments? Visit our [FAQ](/faq) or [contact support](/support).
+Questions about payments? Visit our [FAQ](../reference/faq.md) or [contact support](../reference/faq.md).

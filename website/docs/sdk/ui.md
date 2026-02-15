@@ -521,6 +521,6 @@ fn setup_theme(mut commands: Commands) {
 
 ## Next Steps
 
-- [Input System](/docs/sdk/input) - Menu navigation
-- [Audio Plugin](/docs/sdk/audio) - UI sound effects
-- [Core Plugin](/docs/sdk/core) - State management
+- [Input System](./input.md) - Menu navigation
+- [Audio Plugin](./audio.md) - UI sound effects
+- [Core Plugin](./core.md) - State management

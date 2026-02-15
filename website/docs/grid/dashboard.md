@@ -147,7 +147,7 @@ Live bandwidth visualization:
 
 - **High (10:1+)**: Excellent, mostly seeding
 - **Medium (3:1 - 10:1)**: Good, balanced operation
-- **Low (<3:1)**: Still downloading content
+- **Low (under 3:1)**: Still downloading content
 
 Higher efficiency indicates mature node maximizing earnings.
 
