@@ -63,42 +63,42 @@ Complete guide to setting up a GRID node on Raspberry Pi 5. This is the most pop
 ### microSD Setup
 
 1. **Flash OS to microSD:**
-   - Download [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
-   - Choose "Raspberry Pi OS Lite (64-bit)"
-   - Select your microSD card
-   - Click gear icon for advanced options:
-     - Set hostname: `grid-node`
-     - Enable SSH
-     - Set username: `grid` (or your preference)
-     - Set password
-     - Configure WiFi (if not using Ethernet)
-     - Set locale/timezone
-   - Write to card
+ - Download [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
+ - Choose "Raspberry Pi OS Lite (64-bit)"
+ - Select your microSD card
+ - Click gear icon for advanced options:
+ - Set hostname: `grid-node`
+ - Enable SSH
+ - Set username: `grid` (or your preference)
+ - Set password
+ - Configure WiFi (if not using Ethernet)
+ - Set locale/timezone
+ - Write to card
 
 2. **Insert microSD into Pi**
 
 3. **Assemble case** (follow case instructions)
 
 4. **Connect cables:**
-   - Ethernet (recommended) or WiFi
-   - HDMI (optional, for initial setup only)
-   - Power (last step, Pi will boot immediately)
+ - Ethernet (recommended) or WiFi
+ - HDMI (optional, for initial setup only)
+ - Power (last step, Pi will boot immediately)
 
 ### NVMe Setup (Recommended)
 
 1. **Attach M.2 HAT:**
-   - Power off Pi completely
-   - Remove case top
-   - Connect HAT to PCIe FPC connector
-   - Secure with standoffs
-   - Insert NVMe M.2 SSD into HAT slot
-   - Secure SSD with screw
+ - Power off Pi completely
+ - Remove case top
+ - Connect HAT to PCIe FPC connector
+ - Secure with standoffs
+ - Insert NVMe M.2 SSD into HAT slot
+ - Secure SSD with screw
 
 2. **Flash OS to microSD** (same as above)
 
 3. **Boot from microSD initially:**
-   - Pi 5 requires bootloader update for NVMe boot
-   - First boot from microSD, then migrate
+ - Pi 5 requires bootloader update for NVMe boot
+ - First boot from microSD, then migrate
 
 4. **Update bootloader:**
 
@@ -114,7 +114,7 @@ sudo reboot
 ```bash
 # After reboot
 sudo apt install -y rsync
-lsblk  # Identify NVMe device (usually nvme0n1)
+lsblk # Identify NVMe device (usually nvme0n1)
 
 # Partition NVMe
 sudo fdisk /dev/nvme0n1
@@ -213,7 +213,7 @@ sudo grid-config set-storage 450GB
 # Set upload bandwidth limit (optional, recommended for home)
 # 0 = unlimited (use full connection)
 # Or limit to protect other devices:
-sudo grid-config set-upload 80  # 80 Mbps
+sudo grid-config set-upload 80 # 80 Mbps
 
 # Set friendly name
 sudo grid-config set-name "My Pi GRID Node"
@@ -223,7 +223,7 @@ sudo grid-config set-name "My Pi GRID Node"
 
 ```bash
 sudo systemctl start grid-node
-sudo systemctl enable grid-node  # Start on boot
+sudo systemctl enable grid-node # Start on boot
 ```
 
 ### 6. Verify Operation
@@ -262,11 +262,11 @@ Forward port 6881 (TCP + UDP) to your Pi:
 1. Log into your router admin panel
 2. Navigate to Port Forwarding / NAT settings
 3. Add rule:
-   - **External Port**: 6881
-   - **Internal Port**: 6881
-   - **Protocol**: TCP + UDP
-   - **Internal IP**: 192.168.1.XXX (your Pi's IP)
-   - **Description**: GRID Node
+ - **External Port**: 6881
+ - **Internal Port**: 6881
+ - **Protocol**: TCP + UDP
+ - **Internal IP**: 192.168.1.XXX (your Pi's IP)
+ - **Description**: GRID Node
 
 4. Save and apply
 
@@ -290,16 +290,16 @@ sudo nano /etc/netplan/50-cloud-init.yaml
 
 ```yaml
 network:
-  version: 2
-  ethernets:
-    eth0:
-      addresses:
-        - 192.168.1.100/24
-      gateway4: 192.168.1.1
-      nameservers:
-        addresses:
-          - 8.8.8.8
-          - 1.1.1.1
+ version: 2
+ ethernets:
+ eth0:
+ addresses:
+ - 192.168.1.100/24
+ gateway4: 192.168.1.1
+ nameservers:
+ addresses:
+ - 8.8.8.8
+ - 1.1.1.1
 ```
 
 Apply:

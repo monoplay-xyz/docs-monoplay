@@ -51,27 +51,27 @@ Create `config/config.yaml`:
 
 ```yaml
 node:
-  name: "My GRID Node"
-  wallet_address: "0xYourWalletAddressHere"
+ name: "My GRID Node"
+ wallet_address: "0xYourWalletAddressHere"
 
 storage:
-  path: "/data/games"
-  max_size_gb: 500
-  auto_prune: true
+ path: "/data/games"
+ max_size_gb: 500
+ auto_prune: true
 
 network:
-  max_upload_mbps: 100    # 0 = unlimited
-  max_download_mbps: 100
-  port: 6881
+ max_upload_mbps: 100 # 0 = unlimited
+ max_download_mbps: 100
+ port: 6881
 
 rewards:
-  auto_claim: true
-  claim_threshold_lyth: 50
+ auto_claim: true
+ claim_threshold_lyth: 50
 
 monitoring:
-  dashboard_port: 8080
-  enable_metrics: true
-  metrics_port: 9090
+ dashboard_port: 8080
+ enable_metrics: true
+ metrics_port: 9090
 ```
 
 **Important**: Replace `0xYourWalletAddressHere` with your actual Monolythium wallet address.
@@ -80,15 +80,15 @@ monitoring:
 
 ```bash
 docker run -d \
-  --name grid-node \
-  --restart unless-stopped \
-  -v $(pwd)/config:/config \
-  -v $(pwd)/data:/data \
-  -p 6881:6881 \
-  -p 6881:6881/udp \
-  -p 8080:8080 \
-  -p 9090:9090 \
-  monoplay/grid:latest
+ --name grid-node \
+ --restart unless-stopped \
+ -v $(pwd)/config:/config \
+ -v $(pwd)/data:/data \
+ -p 6881:6881 \
+ -p 6881:6881/udp \
+ -p 8080:8080 \
+ -p 9090:9090 \
+ monoplay/grid:latest
 ```
 
 ### 5. Verify Operation
@@ -126,26 +126,26 @@ For easier management, use Docker Compose:
 version: '3.8'
 
 services:
-  grid-node:
-    image: monoplay/grid:latest
-    container_name: grid-node
-    restart: unless-stopped
-    ports:
-      - "6881:6881"
-      - "6881:6881/udp"
-      - "8080:8080"
-      - "9090:9090"
-    volumes:
-      - ./config:/config
-      - ./data:/data
-    environment:
-      - TZ=America/New_York  # Set your timezone
-    networks:
-      - grid-network
+ grid-node:
+ image: monoplay/grid:latest
+ container_name: grid-node
+ restart: unless-stopped
+ ports:
+ - "6881:6881"
+ - "6881:6881/udp"
+ - "8080:8080"
+ - "9090:9090"
+ volumes:
+ - ./config:/config
+ - ./data:/data
+ environment:
+ - TZ=America/New_York # Set your timezone
+ networks:
+ - grid-network
 
 networks:
-  grid-network:
-    driver: bridge
+ grid-network:
+ driver: bridge
 ```
 
 ### 2. Start Service
@@ -179,51 +179,51 @@ docker-compose up -d
 
 ```yaml
 node:
-  name: "My GRID Node"              # Display name (dashboard only)
-  wallet_address: "0x..."           # REQUIRED: Your Monolythium address
-  region: "auto"                    # auto | na-east | eu-west | ap-southeast
+ name: "My GRID Node" # Display name (dashboard only)
+ wallet_address: "0x..." # REQUIRED: Your Monolythium address
+ region: "auto" # auto | na-east | eu-west | ap-southeast
 ```
 
 ### Storage Settings
 
 ```yaml
 storage:
-  path: "/data/games"               # Container path (do not change)
-  max_size_gb: 500                  # Maximum storage allocation
-  auto_prune: true                  # Delete least popular games when full
-  prune_threshold_percent: 95       # Trigger pruning at 95% full
-  min_free_gb: 10                   # Always keep 10 GB free
+ path: "/data/games" # Container path (do not change)
+ max_size_gb: 500 # Maximum storage allocation
+ auto_prune: true # Delete least popular games when full
+ prune_threshold_percent: 95 # Trigger pruning at 95% full
+ min_free_gb: 10 # Always keep 10 GB free
 ```
 
 ### Network Settings
 
 ```yaml
 network:
-  max_upload_mbps: 100              # Upload speed limit (0 = unlimited)
-  max_download_mbps: 100            # Download speed limit
-  port: 6881                        # BitTorrent port
-  max_connections: 200              # Maximum concurrent peers
-  max_upload_slots: 50              # Maximum upload slots
+ max_upload_mbps: 100 # Upload speed limit (0 = unlimited)
+ max_download_mbps: 100 # Download speed limit
+ port: 6881 # BitTorrent port
+ max_connections: 200 # Maximum concurrent peers
+ max_upload_slots: 50 # Maximum upload slots
 ```
 
 ### Rewards Settings
 
 ```yaml
 rewards:
-  auto_claim: true                  # Automatically claim rewards
-  claim_threshold_lyth: 50          # Minimum LYTH before auto-claiming
-  claim_interval_hours: 168         # Claim weekly (168 hours)
+ auto_claim: true # Automatically claim rewards
+ claim_threshold_lyth: 50 # Minimum LYTH before auto-claiming
+ claim_interval_hours: 168 # Claim weekly (168 hours)
 ```
 
 ### Content Settings
 
 ```yaml
 content:
-  mode: "auto"                      # auto | manual | all
-  whitelist: []                     # Games to always seed (manual mode)
-  blacklist: []                     # Games to never seed
-  auto_select_count: 10             # Max games to auto-select
-  prefer_new_releases: true         # Prioritize new games
+ mode: "auto" # auto | manual | all
+ whitelist: [] # Games to always seed (manual mode)
+ blacklist: [] # Games to never seed
+ auto_select_count: 10 # Max games to auto-select
+ prefer_new_releases: true # Prioritize new games
 ```
 
 **Modes:**
@@ -236,10 +236,10 @@ content:
 
 ```yaml
 monitoring:
-  dashboard_port: 8080              # Web dashboard port
-  enable_metrics: true              # Prometheus metrics
-  metrics_port: 9090                # Prometheus metrics port
-  log_level: "info"                 # debug | info | warn | error
+ dashboard_port: 8080 # Web dashboard port
+ enable_metrics: true # Prometheus metrics
+ metrics_port: 9090 # Prometheus metrics port
+ log_level: "info" # debug | info | warn | error
 ```
 
 ## Advanced Configuration
@@ -250,11 +250,11 @@ Mount additional volumes for large storage:
 
 ```yaml
 services:
-  grid-node:
-    # ...
-    volumes:
-      - ./config:/config
-      - /mnt/large-drive/grid-data:/data  # External drive
+ grid-node:
+ # ...
+ volumes:
+ - ./config:/config
+ - /mnt/large-drive/grid-data:/data # External drive
 ```
 
 ### Resource Limits
@@ -263,16 +263,16 @@ Limit CPU and RAM usage:
 
 ```yaml
 services:
-  grid-node:
-    # ...
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 4G
-        reservations:
-          cpus: '1.0'
-          memory: 2G
+ grid-node:
+ # ...
+ deploy:
+ resources:
+ limits:
+ cpus: '2.0'
+ memory: 4G
+ reservations:
+ cpus: '1.0'
+ memory: 2G
 ```
 
 ### Custom Network Bridge
@@ -281,11 +281,11 @@ Use custom Docker network:
 
 ```yaml
 networks:
-  grid-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
+ grid-network:
+ driver: bridge
+ ipam:
+ config:
+ - subnet: 172.20.0.0/16
 ```
 
 ### Environment Variables
@@ -294,13 +294,13 @@ Override config via environment variables:
 
 ```yaml
 services:
-  grid-node:
-    # ...
-    environment:
-      - GRID_WALLET=0xYourWalletAddress
-      - GRID_STORAGE_MAX_GB=500
-      - GRID_UPLOAD_LIMIT_MBPS=100
-      - GRID_LOG_LEVEL=info
+ grid-node:
+ # ...
+ environment:
+ - GRID_WALLET=0xYourWalletAddress
+ - GRID_STORAGE_MAX_GB=500
+ - GRID_UPLOAD_LIMIT_MBPS=100
+ - GRID_LOG_LEVEL=info
 ```
 
 **Priority**: Environment variables override config.yaml values.
@@ -405,12 +405,12 @@ Response:
 
 ```json
 {
-  "status": "healthy",
-  "node_id": "grid-docker-a1b2c3",
-  "uptime_seconds": 86400,
-  "seeding_games": 8,
-  "connected_peers": 42,
-  "wallet_connected": true
+ "status": "healthy",
+ "node_id": "grid-docker-a1b2c3",
+ "uptime_seconds": 86400,
+ "seeding_games": 8,
+ "connected_peers": 42,
+ "wallet_connected": true
 }
 ```
 
@@ -554,24 +554,24 @@ Best performance, lowest resource usage. No special considerations.
 
 ```yaml
 services:
-  grid-node:
-    # ...
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    cap_add:
-      - NET_BIND_SERVICE
-    read_only: false  # GRID needs write access to /data
+ grid-node:
+ # ...
+ security_opt:
+ - no-new-privileges:true
+ cap_drop:
+ - ALL
+ cap_add:
+ - NET_BIND_SERVICE
+ read_only: false # GRID needs write access to /data
 ```
 
 ### Network Isolation
 
 ```yaml
 networks:
-  grid-network:
-    driver: bridge
-    internal: false  # Must be false (node needs internet)
+ grid-network:
+ driver: bridge
+ internal: false # Must be false (node needs internet)
 ```
 
 ### Secrets Management
@@ -583,7 +583,7 @@ echo "0xYourWalletAddress" | docker secret create grid_wallet -
 
 # Reference in compose:
 secrets:
-  - grid_wallet
+ - grid_wallet
 ```
 
 ## Backup and Recovery
@@ -641,19 +641,19 @@ mkdir -p ~/grid-node-1 ~/grid-node-2
 
 ```yaml
 services:
-  grid-node-1:
-    container_name: grid-node-1
-    ports:
-      - "6881:6881"
-      - "8081:8080"
-    # ...
+ grid-node-1:
+ container_name: grid-node-1
+ ports:
+ - "6881:6881"
+ - "8081:8080"
+ # ...
 
-  grid-node-2:
-    container_name: grid-node-2
-    ports:
-      - "6882:6881"
-      - "8082:8080"
-    # ...
+ grid-node-2:
+ container_name: grid-node-2
+ ports:
+ - "6882:6881"
+ - "8082:8080"
+ # ...
 ```
 
 ## Next Steps

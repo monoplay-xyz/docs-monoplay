@@ -82,9 +82,9 @@ Once GitHub is connected, you can push any Forge project to a new repository:
 2. Click the **"GitHub"** button in the top toolbar
 3. Click **"Push to New Repository"**
 4. Fill out the repository details:
-   - **Repository name** — e.g., `my-platformer-game`
-   - **Description** — Brief explanation of your game
-   - **Visibility** — Public (anyone can see) or Private (only you and collaborators)
+ - **Repository name** — e.g., `my-platformer-game`
+ - **Description** — Brief explanation of your game
+ - **Visibility** — Public (anyone can see) or Private (only you and collaborators)
 5. Click **"Create and Push"**
 
 Forge will create the repository and push your current game code with the commit message: `"Initial commit from MonoPlay Forge"`
@@ -168,22 +168,22 @@ Your repository includes:
 
 ```
 your-game/
-├── Cargo.toml          # Rust project configuration
-├── Cargo.lock          # Dependency lockfile
-├── README.md           # Generated documentation
-├── .gitignore          # Files to exclude from version control
+├── Cargo.toml # Rust project configuration
+├── Cargo.lock # Dependency lockfile
+├── README.md # Generated documentation
+├── .gitignore # Files to exclude from version control
 ├── src/
-│   ├── main.rs         # Game entry point
-│   ├── components/     # Entity component definitions
-│   ├── systems/        # Game logic (movement, combat, etc.)
-│   ├── resources/      # Shared game state
-│   └── ui/             # User interface code
+│ ├── main.rs # Game entry point
+│ ├── components/ # Entity component definitions
+│ ├── systems/ # Game logic (movement, combat, etc.)
+│ ├── resources/ # Shared game state
+│ └── ui/ # User interface code
 ├── assets/
-│   ├── textures/       # Sprites and images
-│   ├── fonts/          # Text rendering fonts
-│   ├── audio/          # Sound effects and music
-│   └── config/         # Game configuration files
-└── tests/              # Automated tests
+│ ├── textures/ # Sprites and images
+│ ├── fonts/ # Text rendering fonts
+│ ├── audio/ # Sound effects and music
+│ └── config/ # Game configuration files
+└── tests/ # Automated tests
 ```
 
 ### Editing Code Manually

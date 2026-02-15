@@ -18,9 +18,9 @@ Buy, download, and play your first game on MonoPlay.
 If you haven't already, [create an account](/getting-started/create-account) by connecting an EVM-compatible wallet (MetaMask recommended).
 
 **Quick checklist:**
-- ✅ Wallet installed and set up
-- ✅ Connected to Monolythium network
-- ✅ LYTH tokens in your wallet
+- Wallet installed and set up
+- Connected to Monolythium network
+- LYTH tokens in your wallet
 
 ### 2. Browse the Store
 
@@ -157,10 +157,10 @@ in a factory. Add jumping, double-jump, and basic enemies. Pixel art style.
 
 1. Click **"Publish"** in the Forge menu
 2. Fill out store metadata:
-   - Game title and description
-   - Genre and tags
-   - Price (free or paid in LYTH)
-   - Screenshots and trailer (optional)
+ - Game title and description
+ - Genre and tags
+ - Price (free or paid in LYTH)
+ - Screenshots and trailer (optional)
 3. Submit for automated security review (takes 5-10 minutes)
 4. Once approved, your game goes live on the store
 
@@ -195,25 +195,25 @@ use bevy::prelude::*;
 use monoplay_sdk::*;
 
 fn main() {
-    App::new()
-        .add_plugins(DefaultPlugins)
-        .add_plugins(MonoPlayPlugin)
-        .add_systems(Startup, setup)
-        .add_systems(Update, game_logic)
-        .run();
+ App::new()
+ .add_plugins(DefaultPlugins)
+ .add_plugins(MonoPlayPlugin)
+ .add_systems(Startup, setup)
+ .add_systems(Update, game_logic)
+ .run();
 }
 
 fn setup(mut commands: Commands, license: Res<LicenseVerifier>) {
-    // Verify player owns the game
-    if !license.is_valid() {
-        panic!("No valid license found!");
-    }
+ // Verify player owns the game
+ if !license.is_valid() {
+ panic!("No valid license found!");
+ }
 
-    // Your game setup...
+ // Your game setup...
 }
 
 fn game_logic() {
-    // Your game logic...
+ // Your game logic...
 }
 ```
 
@@ -338,7 +338,7 @@ Forward ports 6881 (TCP/UDP) and 8080 (TCP) to your node's local IP.
 **Linux (systemd):**
 ```bash
 sudo systemctl start monoplay-grid
-sudo systemctl enable monoplay-grid  # Auto-start on boot
+sudo systemctl enable monoplay-grid # Auto-start on boot
 ```
 
 **Windows:**

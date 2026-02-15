@@ -138,11 +138,11 @@ use monoplay_sdk_core::CorePlugin;
 use monoplay_sdk_input::InputPlugin;
 
 fn main() {
-    App::new()
-        .add_plugins(DefaultPlugins)
-        .add_plugins(CorePlugin)
-        .add_plugins(InputPlugin)
-        .run();
+ App::new()
+ .add_plugins(DefaultPlugins)
+ .add_plugins(CorePlugin)
+ .add_plugins(InputPlugin)
+ .run();
 }
 ```
 
@@ -161,7 +161,7 @@ All dependencies are pinned to stable versions for reproducible builds.
 
 | MonoPlay SDK | Bevy Version | Rust Version |
 |--------------|--------------|--------------|
-| 0.1.x        | 0.18.x       | 1.75+        |
+| 0.1.x | 0.18.x | 1.75+ |
 
 Breaking changes follow semantic versioning. Minor version updates (0.1.x → 0.2.x) may introduce breaking changes until 1.0 release.
 

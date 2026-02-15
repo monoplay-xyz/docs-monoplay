@@ -47,10 +47,10 @@ Register a new game on-chain.
 
 ```solidity
 function registerGame(
-    string memory gameId,
-    string memory title,
-    address publisher,
-    string memory metadataURI
+ string memory gameId,
+ string memory title,
+ address publisher,
+ string memory metadataURI
 ) external returns (uint256 gameIndex)
 ```
 
@@ -69,16 +69,16 @@ function registerGame(
 const { ethers } = require('ethers');
 
 const gameRegistry = new ethers.Contract(
-  GAME_REGISTRY_ADDRESS,
-  GAME_REGISTRY_ABI,
-  signer
+ GAME_REGISTRY_ADDRESS,
+ GAME_REGISTRY_ABI,
+ signer
 );
 
 const tx = await gameRegistry.registerGame(
-  'my-awesome-game',
-  'My Awesome Game',
-  publisherAddress,
-  'ipfs://QmX...'
+ 'my-awesome-game',
+ 'My Awesome Game',
+ publisherAddress,
+ 'ipfs://QmX...'
 );
 
 await tx.wait();
@@ -91,15 +91,15 @@ Retrieve game metadata.
 
 ```solidity
 function getGameInfo(string memory gameId)
-    external
-    view
-    returns (
-        string memory title,
-        address publisher,
-        uint256 registeredAt,
-        string memory metadataURI,
-        bool active
-    )
+ external
+ view
+ returns (
+ string memory title,
+ address publisher,
+ uint256 registeredAt,
+ string memory metadataURI,
+ bool active
+ )
 ```
 
 **Example:**
@@ -117,7 +117,7 @@ Update game metadata URI.
 
 ```solidity
 function updateMetadata(string memory gameId, string memory newMetadataURI)
-    external
+ external
 ```
 
 **Access**: Publisher only
@@ -146,12 +146,12 @@ Register a new game version.
 
 ```solidity
 function registerRelease(
-    string memory gameId,
-    string memory version,
-    string memory platform,
-    bytes32 magnetHash,
-    uint256 fileSizeBytes,
-    string memory releaseNotesURI
+ string memory gameId,
+ string memory version,
+ string memory platform,
+ bytes32 magnetHash,
+ uint256 fileSizeBytes,
+ string memory releaseNotesURI
 ) external
 ```
 
@@ -172,14 +172,14 @@ Get latest release for a platform.
 
 ```solidity
 function getLatestRelease(string memory gameId, string memory platform)
-    external
-    view
-    returns (
-        string memory version,
-        bytes32 magnetHash,
-        uint256 fileSizeBytes,
-        uint256 releasedAt
-    )
+ external
+ view
+ returns (
+ string memory version,
+ bytes32 magnetHash,
+ uint256 fileSizeBytes,
+ uint256 releasedAt
+ )
 ```
 
 **Example:**
@@ -196,10 +196,10 @@ Verify a magnet link matches registered hash.
 
 ```solidity
 function verifyMagnetHash(
-    string memory gameId,
-    string memory version,
-    string memory platform,
-    string memory magnetLink
+ string memory gameId,
+ string memory version,
+ string memory platform,
+ string memory magnetLink
 ) external view returns (bool)
 ```
 
@@ -217,9 +217,9 @@ Mint license NFT to buyer.
 
 ```solidity
 function mintLicense(
-    address to,
-    string memory gameId,
-    uint8 licenseType
+ address to,
+ string memory gameId,
+ uint8 licenseType
 ) external returns (uint256 tokenId)
 ```
 
@@ -237,23 +237,23 @@ Check if address owns license for a game.
 
 ```solidity
 function ownsLicense(address owner, string memory gameId)
-    external
-    view
-    returns (bool)
+ external
+ view
+ returns (bool)
 ```
 
 **Example:**
 
 ```javascript
 const hasLicense = await licenseRegistry.ownsLicense(
-  userAddress,
-  'monolands-v2'
+ userAddress,
+ 'monolands-v2'
 );
 
 if (hasLicense) {
-  console.log('User owns license, allow download');
+ console.log('User owns license, allow download');
 } else {
-  console.log('No license found, redirect to purchase');
+ console.log('No license found, redirect to purchase');
 }
 ```
 
@@ -263,14 +263,14 @@ Get license metadata.
 
 ```solidity
 function getLicenseDetails(uint256 tokenId)
-    external
-    view
-    returns (
-        string memory gameId,
-        address owner,
-        uint8 licenseType,
-        uint256 mintedAt
-    )
+ external
+ view
+ returns (
+ string memory gameId,
+ address owner,
+ uint8 licenseType,
+ uint256 mintedAt
+ )
 ```
 
 #### transferLicense
@@ -295,9 +295,9 @@ Submit bandwidth proof (GRID nodes call this).
 
 ```solidity
 function reportBandwidth(
-    uint256 epoch,
-    uint256 bytesUploaded,
-    bytes calldata proof
+ uint256 epoch,
+ uint256 bytesUploaded,
+ bytes calldata proof
 ) external
 ```
 
@@ -329,9 +329,9 @@ Check pending rewards for a node.
 
 ```solidity
 function getNodeRewards(address nodeOperator, uint256 epoch)
-    external
-    view
-    returns (uint256 rewardAmount)
+ external
+ view
+ returns (uint256 rewardAmount)
 ```
 
 **Example:**
@@ -397,13 +397,13 @@ Check deposit status.
 
 ```solidity
 function getDepositStatus(address publisher)
-    external
-    view
-    returns (
-        uint256 depositAmount,
-        uint256 depositedAt,
-        bool canRefund
-    )
+ external
+ view
+ returns (
+ uint256 depositAmount,
+ uint256 depositedAt,
+ bool canRefund
+ )
 ```
 
 ## Integration Examples
@@ -414,20 +414,20 @@ function getDepositStatus(address publisher)
 const { ethers } = require('ethers');
 
 async function canUserDownload(userAddress, gameId) {
-  const licenseRegistry = new ethers.Contract(
-    LICENSE_REGISTRY_ADDRESS,
-    LICENSE_REGISTRY_ABI,
-    provider
-  );
+ const licenseRegistry = new ethers.Contract(
+ LICENSE_REGISTRY_ADDRESS,
+ LICENSE_REGISTRY_ABI,
+ provider
+ );
 
-  return await licenseRegistry.ownsLicense(userAddress, gameId);
+ return await licenseRegistry.ownsLicense(userAddress, gameId);
 }
 
 // Usage
 if (await canUserDownload('0x742d35Cc...', 'monolands-v2')) {
-  // Provide download link
+ // Provide download link
 } else {
-  // Redirect to purchase page
+ // Redirect to purchase page
 }
 ```
 
@@ -435,32 +435,32 @@ if (await canUserDownload('0x742d35Cc...', 'monolands-v2')) {
 
 ```javascript
 async function verifyGameBuild(gameId, version, platform, magnetLink) {
-  const releaseRegistry = new ethers.Contract(
-    RELEASE_REGISTRY_ADDRESS,
-    RELEASE_REGISTRY_ABI,
-    provider
-  );
+ const releaseRegistry = new ethers.Contract(
+ RELEASE_REGISTRY_ADDRESS,
+ RELEASE_REGISTRY_ABI,
+ provider
+ );
 
-  return await releaseRegistry.verifyMagnetHash(
-    gameId,
-    version,
-    platform,
-    magnetLink
-  );
+ return await releaseRegistry.verifyMagnetHash(
+ gameId,
+ version,
+ platform,
+ magnetLink
+ );
 }
 
 // Usage
 const isLegit = await verifyGameBuild(
-  'monolands-v2',
-  '1.0.0',
-  'windows',
-  'magnet:?xt=urn:btih:...'
+ 'monolands-v2',
+ '1.0.0',
+ 'windows',
+ 'magnet:?xt=urn:btih:...'
 );
 
 if (isLegit) {
-  console.log('✓ Verified official build');
+ console.log(' Verified official build');
 } else {
-  console.log('⚠ Unverified build, possibly pirated');
+ console.log(' Unverified build, possibly pirated');
 }
 ```
 
@@ -468,24 +468,24 @@ if (isLegit) {
 
 ```javascript
 async function getPublisherGames(publisherAddress) {
-  const gameRegistry = new ethers.Contract(
-    GAME_REGISTRY_ADDRESS,
-    GAME_REGISTRY_ABI,
-    provider
-  );
+ const gameRegistry = new ethers.Contract(
+ GAME_REGISTRY_ADDRESS,
+ GAME_REGISTRY_ABI,
+ provider
+ );
 
-  // Get total games
-  const totalGames = await gameRegistry.getPublisherGameCount(publisherAddress);
+ // Get total games
+ const totalGames = await gameRegistry.getPublisherGameCount(publisherAddress);
 
-  // Fetch each game
-  const games = [];
-  for (let i = 0; i < totalGames; i++) {
-    const gameId = await gameRegistry.getPublisherGameAt(publisherAddress, i);
-    const info = await gameRegistry.getGameInfo(gameId);
-    games.push({ gameId, ...info });
-  }
+ // Fetch each game
+ const games = [];
+ for (let i = 0; i < totalGames; i++) {
+ const gameId = await gameRegistry.getPublisherGameAt(publisherAddress, i);
+ const info = await gameRegistry.getGameInfo(gameId);
+ games.push({ gameId, ...info });
+ }
 
-  return games;
+ return games;
 }
 ```
 
@@ -493,14 +493,14 @@ async function getPublisherGames(publisherAddress) {
 
 ```javascript
 const licenseRegistry = new ethers.Contract(
-  LICENSE_REGISTRY_ADDRESS,
-  LICENSE_REGISTRY_ABI,
-  provider
+ LICENSE_REGISTRY_ADDRESS,
+ LICENSE_REGISTRY_ABI,
+ provider
 );
 
 // Listen for transfers
 licenseRegistry.on('Transfer', (from, to, tokenId) => {
-  console.log(`License ${tokenId} transferred from ${from} to ${to}`);
+ console.log(`License ${tokenId} transferred from ${from} to ${to}`);
 });
 
 // Get historical transfers
@@ -508,7 +508,7 @@ const filter = licenseRegistry.filters.Transfer(null, null, null);
 const events = await licenseRegistry.queryFilter(filter, fromBlock, toBlock);
 
 events.forEach(event => {
-  console.log('Transfer:', event.args);
+ console.log('Transfer:', event.args);
 });
 ```
 
@@ -583,10 +583,10 @@ All fund-transfer functions use:
 Always check license ownership on-chain before granting access:
 
 ```javascript
-// ✓ Good: Verify on-chain
+// Good: Verify on-chain
 const hasLicense = await licenseRegistry.ownsLicense(user, gameId);
 
-// ✗ Bad: Trust API response only
+// Bad: Trust API response only
 const apiResponse = await fetch('/api/check-license');
 ```
 
@@ -599,12 +599,12 @@ APIs can be spoofed; blockchain cannot.
 Claim multiple epochs in one transaction:
 
 ```javascript
-// ✓ Efficient: Batch claim
+// Efficient: Batch claim
 await seederRewards.claimRewards([120, 121, 122, 123]);
 
-// ✗ Wasteful: Multiple transactions
+// Wasteful: Multiple transactions
 for (let epoch of [120, 121, 122, 123]) {
-  await seederRewards.claimRewards([epoch]);
+ await seederRewards.claimRewards([epoch]);
 }
 ```
 
@@ -663,16 +663,16 @@ Use Sprintnet testnet for integration testing:
 
 ```javascript
 const provider = new ethers.providers.JsonRpcProvider(
-  'https://rpc.sprintnet.monoplay.xyz'
+ 'https://rpc.sprintnet.monoplay.xyz'
 );
 
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 
 // Interact with testnet contracts
 const gameRegistry = new ethers.Contract(
-  TESTNET_GAME_REGISTRY,
-  ABI,
-  signer
+ TESTNET_GAME_REGISTRY,
+ ABI,
+ signer
 );
 ```
 

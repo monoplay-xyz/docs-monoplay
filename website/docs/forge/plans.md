@@ -13,20 +13,20 @@ MonoPlay Forge offers three pricing tiers to fit different needs, from hobbyists
 |---------|------|---------|--------|
 | **Monthly Price** | $0 | $20 | $50 |
 | **Generations per Month** | 5 | 100 | Unlimited |
-| **Browser Preview** | ✅ | ✅ | ✅ |
-| **Source Code Access** | ✅ | ✅ | ✅ |
-| **GitHub Integration** | ✅ | ✅ | ✅ |
+| **Browser Preview** | | | |
+| **Source Code Access** | | | |
+| **GitHub Integration** | | | |
 | **Template Access** | All 5 | All 5 | All 5 + Beta |
 | **SDK Access** | All 8 | All 8 | All 8 + Experimental |
-| **Publishing to Store** | ❌ | ✅ | ✅ |
-| **Platform Builds** | ❌ | ✅ | ✅ |
-| **Code Signing** | ❌ | ✅ | ✅ |
-| **Commercial Use** | ❌ | ✅ | ✅ |
-| **Priority Builds** | ❌ | ❌ | ✅ (2x faster) |
-| **Priority Support** | ❌ | ❌ | ✅ (24h response) |
-| **Team Collaboration** | ❌ | ❌ | ✅ (up to 5 seats) |
-| **Custom SDK Modules** | ❌ | ❌ | ✅ |
-| **Advanced Analytics** | ❌ | ❌ | ✅ |
+| **Publishing to Store** | | | |
+| **Platform Builds** | | | |
+| **Code Signing** | | | |
+| **Commercial Use** | | | |
+| **Priority Builds** | | | (2x faster) |
+| **Priority Support** | | | (24h response) |
+| **Team Collaboration** | | | (up to 5 seats) |
+| **Custom SDK Modules** | | | |
+| **Advanced Analytics** | | | |
 
 ---
 
@@ -189,10 +189,10 @@ You ship the game in 8 weeks (vs. 12+ weeks without Forge), publish on MonoPlay,
 **Example efficient workflow:**
 ```
 Gen 1: "Create a platformer with jump, move, and basic platforms.
-        Add 3 levels with increasing difficulty."
+ Add 3 levels with increasing difficulty."
 Gen 2: "Add collectible coins and enemy spikes. Show score and lives."
 Gen 3: "Polish: Add sound effects, particle effects on coin collect,
-        and a victory screen."
+ and a victory screen."
 Gen 4: Fix any bugs found during playtesting.
 Gen 5: Reserve for final polish or emergency fix.
 ```
@@ -421,4 +421,4 @@ Now that you understand pricing:
 - Explore [available templates](./templates.md)
 - Understand [publishing and revenue](./publishing.md)
 
-Happy building! 🎮
+Happy building! 

@@ -28,11 +28,11 @@ To update your published game using Forge:
 1. Open your project in the Forge dashboard
 2. Click **"Continue Development"**
 3. Write iteration prompts as usual:
-   ```
-   Fix the bug where jumping near walls causes clipping
-   Add a new power-up that grants invincibility for 5 seconds
-   Increase enemy AI difficulty in later levels
-   ```
+ ```
+ Fix the bug where jumping near walls causes clipping
+ Add a new power-up that grants invincibility for 5 seconds
+ Increase enemy AI difficulty in later levels
+ ```
 4. Test changes in the browser preview
 5. Once satisfied, click **"Publish Update"**
 
@@ -41,27 +41,27 @@ To update your published game using Forge:
 When you click "Publish Update":
 
 1. **Version Increment** — Choose version type:
-   - **Patch** (1.0.0 → 1.0.1) — Bug fixes and minor tweaks
-   - **Minor** (1.0.0 → 1.1.0) — New features, content additions
-   - **Major** (1.0.0 → 2.0.0) — Significant overhaul or breaking changes
+ - **Patch** (1.0.0 → 1.0.1) — Bug fixes and minor tweaks
+ - **Minor** (1.0.0 → 1.1.0) — New features, content additions
+ - **Major** (1.0.0 → 2.0.0) — Significant overhaul or breaking changes
 
 2. **Patch Notes** — Write player-facing notes:
-   ```markdown
-   ## Version 1.1.0 - New Power-Ups Update
+ ```markdown
+ ## Version 1.1.0 - New Power-Ups Update
 
-   ### New Features
-   - Added invincibility power-up
-   - Added speed boost power-up
-   - Power-ups now spawn randomly during gameplay
+ ### New Features
+ - Added invincibility power-up
+ - Added speed boost power-up
+ - Power-ups now spawn randomly during gameplay
 
-   ### Improvements
-   - Enemy AI is now more challenging in levels 6-10
-   - Improved wall collision detection
+ ### Improvements
+ - Enemy AI is now more challenging in levels 6-10
+ - Improved wall collision detection
 
-   ### Bug Fixes
-   - Fixed wall clipping issue when jumping
-   - Fixed score not saving between sessions
-   ```
+ ### Bug Fixes
+ - Fixed wall clipping issue when jumping
+ - Fixed score not saving between sessions
+ ```
 
 3. **Platform Builds** — Forge rebuilds for Windows, macOS, and Linux
 4. **Security Scan** — Quick scan for new vulnerabilities (1-2 minutes)
@@ -97,59 +97,59 @@ Players can choose to stay on older versions if preferred (settings option).
 For more control over updates:
 
 1. **Clone Your Repository**
-   ```bash
-   git clone https://github.com/your-username/your-game.git
-   cd your-game
-   ```
+ ```bash
+ git clone https://github.com/your-username/your-game.git
+ cd your-game
+ ```
 
 2. **Make Changes Locally**
-   - Edit code in your preferred IDE (VS Code, RustRover, etc.)
-   - Test by running `cargo run`
-   - Commit changes: `git commit -am "Add new boss enemy"`
+ - Edit code in your preferred IDE (VS Code, RustRover, etc.)
+ - Test by running `cargo run`
+ - Commit changes: `git commit -am "Add new boss enemy"`
 
 3. **Push to GitHub**
-   ```bash
-   git push origin main
-   ```
+ ```bash
+ git push origin main
+ ```
 
 4. **Sync to Forge** (optional)
-   - Open project in Forge
-   - Click **"Sync from GitHub"**
-   - Forge pulls your changes
+ - Open project in Forge
+ - Click **"Sync from GitHub"**
+ - Forge pulls your changes
 
 5. **Publish Update**
-   - Click **"Publish Update"** in Forge
-   - Fill out version and patch notes
-   - Submit for review
+ - Click **"Publish Update"** in Forge
+ - Fill out version and patch notes
+ - Submit for review
 
 ### Manual Build Upload
 
 If you want to build locally instead of using Forge's build service:
 
 1. **Build for Each Platform**
-   ```bash
-   # Windows (from Linux/Mac using cross)
-   cargo build --release --target x86_64-pc-windows-gnu
+ ```bash
+ # Windows (from Linux/Mac using cross)
+ cargo build --release --target x86_64-pc-windows-gnu
 
-   # macOS (from Mac)
-   cargo build --release --target x86_64-apple-darwin
-   cargo build --release --target aarch64-apple-darwin
+ # macOS (from Mac)
+ cargo build --release --target x86_64-apple-darwin
+ cargo build --release --target aarch64-apple-darwin
 
-   # Linux
-   cargo build --release --target x86_64-unknown-linux-gnu
-   ```
+ # Linux
+ cargo build --release --target x86_64-unknown-linux-gnu
+ ```
 
 2. **Create Installers**
-   - Use tools like `cargo-bundle` or `cargo-packager`
-   - Generate `.exe` installer (Windows), `.dmg` (macOS), `.AppImage` (Linux)
+ - Use tools like `cargo-bundle` or `cargo-packager`
+ - Generate `.exe` installer (Windows), `.dmg` (macOS), `.AppImage` (Linux)
 
 3. **Upload to Developer Portal**
-   - Go to [monoplay.xyz/developers](https://monoplay.xyz/developers)
-   - Select your game
-   - Click **"Upload New Build"**
-   - Upload each platform's installer
-   - Fill out version and patch notes
-   - Submit for review
+ - Go to [monoplay.xyz/developers](https://monoplay.xyz/developers)
+ - Select your game
+ - Click **"Upload New Build"**
+ - Upload each platform's installer
+ - Fill out version and patch notes
+ - Submit for review
 
 This bypasses Forge's build service but uses the same review process.
 
@@ -255,20 +255,20 @@ After launch, players leave reviews and feedback. Use this to prioritize updates
 When players report bugs:
 
 1. **Reproduce the Issue**
-   - Try to trigger the bug yourself
-   - Ask for steps to reproduce if unclear
+ - Try to trigger the bug yourself
+ - Ask for steps to reproduce if unclear
 
 2. **Fix and Test**
-   - Fix in Forge or locally
-   - Test edge cases to ensure it's solved
+ - Fix in Forge or locally
+ - Test edge cases to ensure it's solved
 
 3. **Push Hotfix**
-   - Mark as "Hotfix" for fast-tracked review
-   - Include fix in patch notes
+ - Mark as "Hotfix" for fast-tracked review
+ - Include fix in patch notes
 
 4. **Communicate**
-   - Reply to the review: "Fixed in version 1.0.2, thanks for reporting!"
-   - Shows you're responsive and care about quality
+ - Reply to the review: "Fixed in version 1.0.2, thanks for reporting!"
+ - Shows you're responsive and care about quality
 
 ### Feature Requests
 
@@ -332,22 +332,22 @@ If you use both Forge and local development:
 ### Best Practices
 
 1. **Always sync before iterating in Forge**
-   - Pull latest changes from GitHub
-   - Click "Sync from GitHub" in Forge
-   - Prevents conflicts
+ - Pull latest changes from GitHub
+ - Click "Sync from GitHub" in Forge
+ - Prevents conflicts
 
 2. **Document manual changes**
-   - Add comments explaining your code
-   - Helps Forge's AI understand context
+ - Add comments explaining your code
+ - Helps Forge's AI understand context
 
 3. **Use branches for experiments**
-   - Create a `forge-iteration` branch for AI changes
-   - Merge to `main` after testing
-   - Keeps main stable
+ - Create a `forge-iteration` branch for AI changes
+ - Merge to `main` after testing
+ - Keeps main stable
 
 4. **Test thoroughly after syncing**
-   - Forge AI + manual code can conflict
-   - Run full playtest after major syncs
+ - Forge AI + manual code can conflict
+ - Run full playtest after major syncs
 
 ### When Forge Can't Understand Your Code
 

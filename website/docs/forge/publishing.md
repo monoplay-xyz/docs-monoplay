@@ -185,20 +185,20 @@ Click **"Submit for Review"** when ready.
 MonoPlay's automated and manual review ensures quality and compliance:
 
 1. **Automated Checks** (instant)
-   - All required fields filled
-   - Media meets technical requirements
-   - Builds are functional and launch correctly
+ - All required fields filled
+ - Media meets technical requirements
+ - Builds are functional and launch correctly
 
 2. **Content Review** (1-3 days)
-   - Game matches description
-   - No inappropriate content
-   - No copyright infringement
-   - Complies with platform policies
+ - Game matches description
+ - No inappropriate content
+ - No copyright infringement
+ - Complies with platform policies
 
 3. **Quality Assurance** (1-2 days)
-   - Game is playable and stable
-   - No critical bugs
-   - Performance is acceptable
+ - Game is playable and stable
+ - No critical bugs
+ - Performance is acceptable
 
 **Average review time: 2-4 business days**
 
@@ -391,4 +391,4 @@ Once published, learn how to [update your game](./updating-games.md) with new co
 
 Need to increase your generation limit to finish polishing? See [pricing plans](./plans.md).
 
-Good luck with your launch! 🚀
+Good luck with your launch! 

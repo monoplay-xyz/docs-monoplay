@@ -65,10 +65,10 @@ Displays:
 
 **Status indicators:**
 
-- 🟢 **Online**: Fully operational, earning rewards
-- 🟡 **Syncing**: Downloading content, partially operational
-- 🔴 **Offline**: Not connected to network
-- ⚠️ **Warning**: Issues detected (hover for details)
+- **Online**: Fully operational, earning rewards
+- **Syncing**: Downloading content, partially operational
+- **Offline**: Not connected to network
+- **Warning**: Issues detected (hover for details)
 
 ### System Resources Card
 
@@ -349,11 +349,11 @@ Configure alerts for important events:
 
 ```yaml
 notifications:
-  webhook_url: "https://discord.com/api/webhooks/..."
-  events:
-    - node_offline
-    - rewards_claimable
-    - storage_low
+ webhook_url: "https://discord.com/api/webhooks/..."
+ events:
+ - node_offline
+ - rewards_claimable
+ - storage_low
 ```
 
 ## Mobile Access
@@ -389,15 +389,15 @@ Dashboard data available via REST API:
 ```bash
 # Get node status
 curl -H "Authorization: Bearer YOUR_TOKEN" \
-  http://localhost:8080/api/status
+ http://localhost:8080/api/status
 
 # Get bandwidth stats
 curl -H "Authorization: Bearer YOUR_TOKEN" \
-  http://localhost:8080/api/bandwidth?period=7d
+ http://localhost:8080/api/bandwidth?period=7d
 
 # Get rewards
 curl -H "Authorization: Bearer YOUR_TOKEN" \
-  http://localhost:8080/api/rewards
+ http://localhost:8080/api/rewards
 ```
 
 Full API documentation: [docs.monoplay.xyz/api/grid](https://docs.monoplay.xyz/api/grid)
@@ -460,14 +460,14 @@ Dashboard uses ~50 MB RAM and minimal CPU.
 
 ```yaml
 monitoring:
-  enable_realtime_graphs: false
+ enable_realtime_graphs: false
 ```
 
 **Reduce metric collection frequency:**
 
 ```yaml
 monitoring:
-  metric_interval_seconds: 60  # Default: 15
+ metric_interval_seconds: 60 # Default: 15
 ```
 
 ### Optimize for Low Bandwidth
@@ -476,14 +476,14 @@ monitoring:
 
 ```yaml
 monitoring:
-  dashboard_update_interval: 30  # Seconds, default: 5
+ dashboard_update_interval: 30 # Seconds, default: 5
 ```
 
 **Disable charts:**
 
 ```yaml
 monitoring:
-  enable_charts: false
+ enable_charts: false
 ```
 
 Access via CLI instead: `grid-cli status`

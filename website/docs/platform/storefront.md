@@ -239,9 +239,9 @@ Storage: 20 GB SSD space
 ```
 5 stars: ████████░░ 80% (240 reviews)
 4 stars: ██░░░░░░░░ 15% (45 reviews)
-3 stars: █░░░░░░░░░  5% (15 reviews)
-2 stars: ░░░░░░░░░░  0% (0 reviews)
-1 star:  ░░░░░░░░░░  0% (0 reviews)
+3 stars: █░░░░░░░░░ 5% (15 reviews)
+2 stars: ░░░░░░░░░░ 0% (0 reviews)
+1 star: ░░░░░░░░░░ 0% (0 reviews)
 
 Overall: 4.8/5 (300 reviews)
 ```

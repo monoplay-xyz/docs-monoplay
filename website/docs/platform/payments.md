@@ -23,9 +23,9 @@ MonoPlay uses **LYTH tokens** (the native cryptocurrency of the Monolythium bloc
 
 **Step 3: Approve Transaction**
 1. Your wallet displays:
-   - **To**: MonoPlay payment contract address
-   - **Amount**: Total LYTH for your purchase
-   - **Gas Fee**: Small transaction fee (usually < $0.01)
+ - **To**: MonoPlay payment contract address
+ - **Amount**: Total LYTH for your purchase
+ - **Gas Fee**: Small transaction fee (usually < $0.01)
 2. Review and click "Confirm"
 
 **Step 4: Transaction Confirmed**
@@ -77,10 +77,10 @@ Game: CyberRunner 2077
 Price: 50 LYTH (~$25.00 USD)
 
 Cart Total:
-  CyberRunner 2077: 50 LYTH
-  Gas Fee (estimated): 0.02 LYTH
-  ─────────────────────────────
-  Total: 50.02 LYTH (~$25.01 USD)
+ CyberRunner 2077: 50 LYTH
+ Gas Fee (estimated): 0.02 LYTH
+ ─────────────────────────────
+ Total: 50.02 LYTH (~$25.01 USD)
 ```
 
 **Note:** USD prices are estimates. You pay in LYTH, which fluctuates against USD.

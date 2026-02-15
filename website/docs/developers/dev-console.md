@@ -327,25 +327,25 @@ Configure webhook endpoints for real-time notifications:
 
 1. Enter endpoint URL
 2. Select events:
-   - Game published
-   - License purchased
-   - Review posted
-   - Update released
+ - Game published
+ - License purchased
+ - Review posted
+ - Update released
 3. Generate signing secret (verify webhook authenticity)
 
 **Webhook Format:**
 
 ```json
 {
-  "event": "license.purchased",
-  "timestamp": "2026-02-14T12:34:56Z",
-  "data": {
-    "game_id": "monolands-v2",
-    "buyer": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    "price": 25.0,
-    "currency": "LYTH"
-  },
-  "signature": "sha256=..."
+ "event": "license.purchased",
+ "timestamp": "2026-02-14T12:34:56Z",
+ "data": {
+ "game_id": "monolands-v2",
+ "buyer": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+ "price": 25.0,
+ "currency": "LYTH"
+ },
+ "signature": "sha256=..."
 }
 ```
 

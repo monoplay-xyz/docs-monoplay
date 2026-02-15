@@ -119,9 +119,9 @@ Enable in config:
 
 ```yaml
 rewards:
-  auto_claim: true
-  claim_threshold_lyth: 50
-  claim_interval_hours: 168  # Weekly
+ auto_claim: true
+ claim_threshold_lyth: 50
+ claim_interval_hours: 168 # Weekly
 ```
 
 **Benefits:**
@@ -161,7 +161,7 @@ Set minimum LYTH before claiming:
 
 ```yaml
 rewards:
-  claim_threshold_lyth: 50
+ claim_threshold_lyth: 50
 ```
 
 **Recommended thresholds:**
@@ -228,8 +228,8 @@ Let auto-selection mode choose high-demand games:
 
 ```yaml
 content:
-  mode: "auto"
-  prefer_new_releases: true
+ mode: "auto"
+ prefer_new_releases: true
 ```
 
 Auto-selection algorithm prioritizes:
@@ -378,18 +378,18 @@ Current Epoch: 2026-W07 (Mon Feb 10 - Sun Feb 16)
 Epoch Progress: 4d 12h remaining
 
 Pending Rewards (Current Epoch):
-  Bandwidth: 124.3 GB uploaded
-  Uptime: 98.2%
-  Estimated Reward: 18.7 LYTH
+ Bandwidth: 124.3 GB uploaded
+ Uptime: 98.2%
+ Estimated Reward: 18.7 LYTH
 
 Claimable Rewards (Previous Epochs):
-  Total: 142.6 LYTH
-  Epochs: 3
+ Total: 142.6 LYTH
+ Epochs: 3
 
 Claimed Rewards (All-Time):
-  Total: 1,247.9 LYTH
-  First claim: 2026-01-15
-  Last claim: 2026-02-03
+ Total: 1,247.9 LYTH
+ First claim: 2026-01-15
+ Last claim: 2026-02-03
 
 Projected Monthly: 287 LYTH
 ```

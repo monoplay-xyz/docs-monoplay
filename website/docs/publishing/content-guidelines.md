@@ -221,12 +221,12 @@ If you believe content on MonoPlay infringes your copyright:
 
 1. Send DMCA notice to: dmca@monoplay.xyz
 2. Include required information (17 U.S.C. § 512(c)):
-   - Your contact information
-   - Identification of copyrighted work
-   - Identification of infringing material
-   - Good faith statement
-   - Accuracy statement
-   - Physical or electronic signature
+ - Your contact information
+ - Identification of copyrighted work
+ - Identification of infringing material
+ - Good faith statement
+ - Accuracy statement
+ - Physical or electronic signature
 
 ### For Publishers
 

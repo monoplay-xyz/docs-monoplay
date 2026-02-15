@@ -116,7 +116,7 @@ No. Set limits in config:
 
 ```yaml
 network:
-  max_upload_mbps: 80  # Leave 20 Mbps for other devices
+ max_upload_mbps: 80 # Leave 20 Mbps for other devices
 ```
 
 Or use router QoS to prioritize other traffic.
@@ -178,10 +178,10 @@ Yes, switch to manual mode:
 
 ```yaml
 content:
-  mode: "manual"
-  whitelist:
-    - "monolands-v2"
-    - "pixel-quest"
+ mode: "manual"
+ whitelist:
+ - "monolands-v2"
+ - "pixel-quest"
 ```
 
 But auto-mode generally earns more by selecting popular games dynamically.
@@ -354,7 +354,7 @@ Enabled by default for automatic port forwarding. Disable if you manually forwar
 
 ```yaml
 network:
-  upnp_enabled: false
+ upnp_enabled: false
 ```
 
 ### Can I seed non-MonoPlay content?

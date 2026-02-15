@@ -55,9 +55,9 @@ In the Developer Console:
 2. Enter the game title
 3. Select supported platforms
 4. Choose pricing model:
-   - **Free**: No purchase required
-   - **Paid**: One-time purchase (minimum 5 LYTH)
-   - **Free-to-Play**: Free download with optional in-game purchases
+ - **Free**: No purchase required
+ - **Paid**: One-time purchase (minimum 5 LYTH)
+ - **Free-to-Play**: Free download with optional in-game purchases
 
 ### 2. Upload Build Files
 
@@ -177,10 +177,10 @@ Submit patches and updates:
 3. Provide new build files
 4. Add version number and release notes
 5. Choose update type:
-   - **Hotfix**: Critical bugs, fast-tracked review
-   - **Patch**: Bug fixes and minor improvements
-   - **Minor Update**: New features, same security scan process
-   - **Major Update**: Significant changes, full re-review
+ - **Hotfix**: Critical bugs, fast-tracked review
+ - **Patch**: Bug fixes and minor improvements
+ - **Minor Update**: New features, same security scan process
+ - **Major Update**: Significant changes, full re-review
 
 Players with existing licenses receive update notifications automatically.
 

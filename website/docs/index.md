@@ -12,7 +12,7 @@ MonoPlay is a decentralized game distribution platform built on the Monolythium 
 
 MonoPlay consists of three interconnected products:
 
-### 🎮 MonoPlay Platform
+### MonoPlay Platform
 
 The complete game store and launcher experience. Browse, purchase, and play games with blockchain-powered licensing and wallet-based authentication. No accounts to manage, no DRM hassles — just games.
 
@@ -23,7 +23,7 @@ The complete game store and launcher experience. Browse, purchase, and play game
 
 [Learn more about the Platform →](/platform/storefront)
 
-### 🛠️ MonoPlay Forge
+### MonoPlay Forge
 
 AI-powered game development tools built on the Bevy engine. Create 2D and 3D games using natural language prompts, visual editors, and pre-built SDKs. No coding required to get started, full code access when you need it.
 
@@ -34,7 +34,7 @@ AI-powered game development tools built on the Bevy engine. Create 2D and 3D gam
 
 [Learn more about Forge →](/forge/overview)
 
-### 🌐 MonoPlay GRID
+### MonoPlay GRID
 
 A decentralized content delivery network (CDN) powered by community-run nodes. Games are distributed via torrent protocol, ensuring fast downloads and censorship resistance. Run a GRID node and earn LYTH rewards for seeding games.
 

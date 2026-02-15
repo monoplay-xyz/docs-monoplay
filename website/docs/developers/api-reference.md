@@ -49,16 +49,16 @@ X-Timestamp: <unix_timestamp>
 const ethers = require('ethers');
 
 async function getAuthHeaders(wallet) {
-  const timestamp = Math.floor(Date.now() / 1000);
-  const message = `MonoPlay Auth ${timestamp}`;
-  const signature = await wallet.signMessage(message);
+ const timestamp = Math.floor(Date.now() / 1000);
+ const message = `MonoPlay Auth ${timestamp}`;
+ const signature = await wallet.signMessage(message);
 
-  return {
-    'Authorization': `Bearer ${signature}`,
-    'X-Wallet-Address': wallet.address,
-    'X-Message': message,
-    'X-Timestamp': timestamp.toString()
-  };
+ return {
+ 'Authorization': `Bearer ${signature}`,
+ 'X-Wallet-Address': wallet.address,
+ 'X-Message': message,
+ 'X-Timestamp': timestamp.toString()
+ };
 }
 
 // Usage
@@ -89,8 +89,8 @@ X-RateLimit-Reset: 1644876543
 
 ```json
 {
-  "error": "Rate limit exceeded",
-  "reset_at": 1644876543
+ "error": "Rate limit exceeded",
+ "reset_at": 1644876543
 }
 ```
 
@@ -120,26 +120,26 @@ curl "https://api.monoplay.xyz/api/catalog?genre=action&sort=popular&limit=10"
 
 ```json
 {
-  "games": [
-    {
-      "id": "monolands-v2",
-      "title": "MonoLands v2",
-      "publisher": "MonoPlay Studios",
-      "publisher_address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
-      "short_description": "Explore 48 unique planets in this space exploration game",
-      "genres": ["adventure", "exploration"],
-      "platforms": ["windows", "macos", "linux"],
-      "price_lyth": 25.0,
-      "rating": 4.8,
-      "total_downloads": 1247,
-      "release_date": "2026-02-01T00:00:00Z",
-      "logo_url": "https://cdn.monoplay.xyz/games/monolands-v2/logo.png",
-      "header_url": "https://cdn.monoplay.xyz/games/monolands-v2/header.png"
-    }
-  ],
-  "total": 156,
-  "limit": 10,
-  "offset": 0
+ "games": [
+ {
+ "id": "monolands-v2",
+ "title": "MonoLands v2",
+ "publisher": "MonoPlay Studios",
+ "publisher_address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
+ "short_description": "Explore 48 unique planets in this space exploration game",
+ "genres": ["adventure", "exploration"],
+ "platforms": ["windows", "macos", "linux"],
+ "price_lyth": 25.0,
+ "rating": 4.8,
+ "total_downloads": 1247,
+ "release_date": "2026-02-01T00:00:00Z",
+ "logo_url": "https://cdn.monoplay.xyz/games/monolands-v2/logo.png",
+ "header_url": "https://cdn.monoplay.xyz/games/monolands-v2/header.png"
+ }
+ ],
+ "total": 156,
+ "limit": 10,
+ "offset": 0
 }
 ```
 
@@ -157,47 +157,47 @@ curl https://api.monoplay.xyz/api/catalog/monolands-v2
 
 ```json
 {
-  "id": "monolands-v2",
-  "title": "MonoLands v2",
-  "publisher": "MonoPlay Studios",
-  "publisher_address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
-  "short_description": "Explore 48 unique planets...",
-  "full_description": "# MonoLands v2\n\nExplore vast procedurally...",
-  "genres": ["adventure", "exploration"],
-  "tags": ["space", "procedural", "multiplayer"],
-  "platforms": ["windows", "macos", "linux"],
-  "price_lyth": 25.0,
-  "rating": 4.8,
-  "total_reviews": 87,
-  "total_downloads": 1247,
-  "release_date": "2026-02-01T00:00:00Z",
-  "latest_version": "1.0.0",
-  "age_rating": "E",
-  "content_descriptors": ["fantasy_violence"],
-  "logo_url": "https://cdn.monoplay.xyz/games/monolands-v2/logo.png",
-  "header_url": "https://cdn.monoplay.xyz/games/monolands-v2/header.png",
-  "screenshots": [
-    "https://cdn.monoplay.xyz/games/monolands-v2/screenshot1.png",
-    "https://cdn.monoplay.xyz/games/monolands-v2/screenshot2.png"
-  ],
-  "system_requirements": {
-    "windows": {
-      "minimum": {
-        "os": "Windows 10 1809+",
-        "cpu": "Intel Core i3 / AMD Ryzen 3",
-        "ram_gb": 4,
-        "gpu": "GTX 1050 / RX 560",
-        "storage_gb": 5
-      },
-      "recommended": {
-        "os": "Windows 11",
-        "cpu": "Intel Core i5 / AMD Ryzen 5",
-        "ram_gb": 8,
-        "gpu": "RTX 3060 / RX 6600",
-        "storage_gb": 5
-      }
-    }
-  }
+ "id": "monolands-v2",
+ "title": "MonoLands v2",
+ "publisher": "MonoPlay Studios",
+ "publisher_address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
+ "short_description": "Explore 48 unique planets...",
+ "full_description": "# MonoLands v2\n\nExplore vast procedurally...",
+ "genres": ["adventure", "exploration"],
+ "tags": ["space", "procedural", "multiplayer"],
+ "platforms": ["windows", "macos", "linux"],
+ "price_lyth": 25.0,
+ "rating": 4.8,
+ "total_reviews": 87,
+ "total_downloads": 1247,
+ "release_date": "2026-02-01T00:00:00Z",
+ "latest_version": "1.0.0",
+ "age_rating": "E",
+ "content_descriptors": ["fantasy_violence"],
+ "logo_url": "https://cdn.monoplay.xyz/games/monolands-v2/logo.png",
+ "header_url": "https://cdn.monoplay.xyz/games/monolands-v2/header.png",
+ "screenshots": [
+ "https://cdn.monoplay.xyz/games/monolands-v2/screenshot1.png",
+ "https://cdn.monoplay.xyz/games/monolands-v2/screenshot2.png"
+ ],
+ "system_requirements": {
+ "windows": {
+ "minimum": {
+ "os": "Windows 10 1809+",
+ "cpu": "Intel Core i3 / AMD Ryzen 3",
+ "ram_gb": 4,
+ "gpu": "GTX 1050 / RX 560",
+ "storage_gb": 5
+ },
+ "recommended": {
+ "os": "Windows 11",
+ "cpu": "Intel Core i5 / AMD Ryzen 5",
+ "ram_gb": 8,
+ "gpu": "RTX 3060 / RX 6600",
+ "storage_gb": 5
+ }
+ }
+ }
 }
 ```
 
@@ -223,10 +223,10 @@ curl "https://api.monoplay.xyz/api/licenses/monolands-v2/check?wallet=0x742d35Cc
 
 ```json
 {
-  "has_license": true,
-  "license_id": 12345,
-  "purchased_at": "2026-02-10T14:23:11Z",
-  "license_type": "single_user"
+ "has_license": true,
+ "license_id": 12345,
+ "purchased_at": "2026-02-10T14:23:11Z",
+ "license_type": "single_user"
 }
 ```
 
@@ -240,28 +240,28 @@ Get all licenses owned by authenticated wallet.
 
 ```bash
 curl -H "Authorization: Bearer <signature>" \
-     -H "X-Wallet-Address: <wallet>" \
-     -H "X-Message: <message>" \
-     -H "X-Timestamp: <timestamp>" \
-     https://api.monoplay.xyz/api/licenses/my-licenses
+ -H "X-Wallet-Address: <wallet>" \
+ -H "X-Message: <message>" \
+ -H "X-Timestamp: <timestamp>" \
+ https://api.monoplay.xyz/api/licenses/my-licenses
 ```
 
 **Response:**
 
 ```json
 {
-  "licenses": [
-    {
-      "license_id": 12345,
-      "game_id": "monolands-v2",
-      "game_title": "MonoLands v2",
-      "license_type": "single_user",
-      "purchased_at": "2026-02-10T14:23:11Z",
-      "price_paid_lyth": 25.0,
-      "tx_hash": "0xabc123..."
-    }
-  ],
-  "total": 5
+ "licenses": [
+ {
+ "license_id": 12345,
+ "game_id": "monolands-v2",
+ "game_title": "MonoLands v2",
+ "license_type": "single_user",
+ "purchased_at": "2026-02-10T14:23:11Z",
+ "price_paid_lyth": 25.0,
+ "tx_hash": "0xabc123..."
+ }
+ ],
+ "total": 5
 }
 ```
 
@@ -281,22 +281,22 @@ curl https://api.monoplay.xyz/api/releases/monolands-v2
 
 ```json
 {
-  "releases": [
-    {
-      "version": "1.0.0",
-      "release_date": "2026-02-01T00:00:00Z",
-      "release_notes": "Initial release\n- 48 unique planets\n- Multiplayer support\n- Mod support",
-      "platforms": ["windows", "macos", "linux"],
-      "status": "live"
-    },
-    {
-      "version": "1.0.1",
-      "release_date": "2026-02-10T00:00:00Z",
-      "release_notes": "Bug fixes and performance improvements",
-      "platforms": ["windows", "macos", "linux"],
-      "status": "live"
-    }
-  ]
+ "releases": [
+ {
+ "version": "1.0.0",
+ "release_date": "2026-02-01T00:00:00Z",
+ "release_notes": "Initial release\n- 48 unique planets\n- Multiplayer support\n- Mod support",
+ "platforms": ["windows", "macos", "linux"],
+ "status": "live"
+ },
+ {
+ "version": "1.0.1",
+ "release_date": "2026-02-10T00:00:00Z",
+ "release_notes": "Bug fixes and performance improvements",
+ "platforms": ["windows", "macos", "linux"],
+ "status": "live"
+ }
+ ]
 }
 ```
 
@@ -320,14 +320,14 @@ curl "https://api.monoplay.xyz/api/releases/monolands-v2/latest?platform=windows
 
 ```json
 {
-  "version": "1.0.1",
-  "release_date": "2026-02-10T00:00:00Z",
-  "release_notes": "Bug fixes and performance improvements",
-  "platform": "windows",
-  "download_url": "magnet:?xt=urn:btih:...",
-  "file_size_bytes": 4294967296,
-  "checksum_sha256": "abc123...",
-  "status": "live"
+ "version": "1.0.1",
+ "release_date": "2026-02-10T00:00:00Z",
+ "release_notes": "Bug fixes and performance improvements",
+ "platform": "windows",
+ "download_url": "magnet:?xt=urn:btih:...",
+ "file_size_bytes": 4294967296,
+ "checksum_sha256": "abc123...",
+ "status": "live"
 }
 ```
 
@@ -349,27 +349,27 @@ curl https://api.monoplay.xyz/api/publishers/0x366d8135D7413C09564044D345A245771
 
 ```json
 {
-  "address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
-  "display_name": "MonoPlay Studios",
-  "bio": "Creating innovative blockchain games",
-  "website": "https://monoplay.xyz",
-  "social_links": {
-    "twitter": "https://twitter.com/monoplay",
-    "discord": "https://discord.gg/monoplay"
-  },
-  "verified": true,
-  "member_since": "2025-12-01T00:00:00Z",
-  "total_games": 3,
-  "total_downloads": 5421,
-  "average_rating": 4.7,
-  "games": [
-    {
-      "id": "monolands-v2",
-      "title": "MonoLands v2",
-      "rating": 4.8,
-      "downloads": 1247
-    }
-  ]
+ "address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
+ "display_name": "MonoPlay Studios",
+ "bio": "Creating innovative blockchain games",
+ "website": "https://monoplay.xyz",
+ "social_links": {
+ "twitter": "https://twitter.com/monoplay",
+ "discord": "https://discord.gg/monoplay"
+ },
+ "verified": true,
+ "member_since": "2025-12-01T00:00:00Z",
+ "total_games": 3,
+ "total_downloads": 5421,
+ "average_rating": 4.7,
+ "games": [
+ {
+ "id": "monolands-v2",
+ "title": "MonoLands v2",
+ "rating": 4.8,
+ "downloads": 1247
+ }
+ ]
 }
 ```
 
@@ -383,30 +383,30 @@ Get authenticated publisher's own profile.
 
 ```bash
 curl -H "Authorization: Bearer <signature>" \
-     -H "X-Wallet-Address: <wallet>" \
-     -H "X-Message: <message>" \
-     -H "X-Timestamp: <timestamp>" \
-     https://api.monoplay.xyz/api/publishers/my-profile
+ -H "X-Wallet-Address: <wallet>" \
+ -H "X-Message: <message>" \
+ -H "X-Timestamp: <timestamp>" \
+ https://api.monoplay.xyz/api/publishers/my-profile
 ```
 
 **Response:**
 
 ```json
 {
-  "address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
-  "display_name": "MonoPlay Studios",
-  "email": "contact@monoplay.xyz",
-  "verified": true,
-  "verification_expires": "2027-01-15T00:00:00Z",
-  "total_revenue_lyth": 85432.5,
-  "claimable_revenue_lyth": 127.3,
-  "games": [
-    {
-      "id": "monolands-v2",
-      "status": "live",
-      "revenue_lyth": 31175.0
-    }
-  ]
+ "address": "0x366d8135D7413C09564044D345A245771c9BaC5B",
+ "display_name": "MonoPlay Studios",
+ "email": "contact@monoplay.xyz",
+ "verified": true,
+ "verification_expires": "2027-01-15T00:00:00Z",
+ "total_revenue_lyth": 85432.5,
+ "claimable_revenue_lyth": 127.3,
+ "games": [
+ {
+ "id": "monolands-v2",
+ "status": "live",
+ "revenue_lyth": 31175.0
+ }
+ ]
 }
 ```
 
@@ -429,25 +429,25 @@ Get download statistics for a game.
 
 ```bash
 curl -H "Authorization: Bearer <signature>" \
-     https://api.monoplay.xyz/api/analytics/monolands-v2/downloads?period=30d&group_by=day
+ https://api.monoplay.xyz/api/analytics/monolands-v2/downloads?period=30d&group_by=day
 ```
 
 **Response:**
 
 ```json
 {
-  "period": "30d",
-  "total_downloads": 1247,
-  "data": [
-    {
-      "date": "2026-02-01",
-      "downloads": 142
-    },
-    {
-      "date": "2026-02-02",
-      "downloads": 87
-    }
-  ]
+ "period": "30d",
+ "total_downloads": 1247,
+ "data": [
+ {
+ "date": "2026-02-01",
+ "downloads": 142
+ },
+ {
+ "date": "2026-02-02",
+ "downloads": 87
+ }
+ ]
 }
 ```
 
@@ -474,15 +474,15 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "results": [
-    {
-      "id": "monolands-v2",
-      "title": "MonoLands v2",
-      "publisher": "MonoPlay Studios",
-      "score": 0.95
-    }
-  ],
-  "total": 12
+ "results": [
+ {
+ "id": "monolands-v2",
+ "title": "MonoLands v2",
+ "publisher": "MonoPlay Studios",
+ "score": 0.95
+ }
+ ],
+ "total": 12
 }
 ```
 
@@ -492,9 +492,9 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "error": "Error message",
-  "code": "ERROR_CODE",
-  "details": {}
+ "error": "Error message",
+ "code": "ERROR_CODE",
+ "details": {}
 }
 ```
 
@@ -504,12 +504,12 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "error": "Invalid parameter",
-  "code": "INVALID_PARAMETER",
-  "details": {
-    "parameter": "genre",
-    "message": "Invalid genre value"
-  }
+ "error": "Invalid parameter",
+ "code": "INVALID_PARAMETER",
+ "details": {
+ "parameter": "genre",
+ "message": "Invalid genre value"
+ }
 }
 ```
 
@@ -517,8 +517,8 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "error": "Authentication required",
-  "code": "UNAUTHORIZED"
+ "error": "Authentication required",
+ "code": "UNAUTHORIZED"
 }
 ```
 
@@ -526,11 +526,11 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "error": "Insufficient permissions",
-  "code": "FORBIDDEN",
-  "details": {
-    "required_role": "publisher"
-  }
+ "error": "Insufficient permissions",
+ "code": "FORBIDDEN",
+ "details": {
+ "required_role": "publisher"
+ }
 }
 ```
 
@@ -538,11 +538,11 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "error": "Game not found",
-  "code": "NOT_FOUND",
-  "details": {
-    "game_id": "nonexistent-game"
-  }
+ "error": "Game not found",
+ "code": "NOT_FOUND",
+ "details": {
+ "game_id": "nonexistent-game"
+ }
 }
 ```
 
@@ -550,11 +550,11 @@ curl "https://api.monoplay.xyz/api/search?q=space"
 
 ```json
 {
-  "error": "Rate limit exceeded",
-  "code": "RATE_LIMIT_EXCEEDED",
-  "details": {
-    "reset_at": 1644876543
-  }
+ "error": "Rate limit exceeded",
+ "code": "RATE_LIMIT_EXCEEDED",
+ "details": {
+ "reset_at": 1644876543
+ }
 }
 ```
 
@@ -606,16 +606,16 @@ Subscribe to real-time events (configure in Developer Console).
 
 ```json
 {
-  "event": "license.purchased",
-  "timestamp": "2026-02-14T12:34:56Z",
-  "data": {
-    "game_id": "monolands-v2",
-    "buyer": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
-    "price": 25.0,
-    "currency": "LYTH",
-    "tx_hash": "0xabc123..."
-  },
-  "signature": "sha256=..."
+ "event": "license.purchased",
+ "timestamp": "2026-02-14T12:34:56Z",
+ "data": {
+ "game_id": "monolands-v2",
+ "buyer": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+ "price": 25.0,
+ "currency": "LYTH",
+ "tx_hash": "0xabc123..."
+ },
+ "signature": "sha256=..."
 }
 ```
 
@@ -625,25 +625,25 @@ Subscribe to real-time events (configure in Developer Console).
 const crypto = require('crypto');
 
 function verifyWebhook(payload, signature, secret) {
-  const hash = crypto
-    .createHmac('sha256', secret)
-    .update(JSON.stringify(payload))
-    .digest('hex');
+ const hash = crypto
+ .createHmac('sha256', secret)
+ .update(JSON.stringify(payload))
+ .digest('hex');
 
-  return `sha256=${hash}` === signature;
+ return `sha256=${hash}` === signature;
 }
 
 // Express.js example
 app.post('/webhook', (req, res) => {
-  const signature = req.headers['x-monoplay-signature'];
+ const signature = req.headers['x-monoplay-signature'];
 
-  if (verifyWebhook(req.body, signature, WEBHOOK_SECRET)) {
-    // Process event
-    console.log('Event:', req.body.event);
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(401);
-  }
+ if (verifyWebhook(req.body, signature, WEBHOOK_SECRET)) {
+ // Process event
+ console.log('Event:', req.body.event);
+ res.sendStatus(200);
+ } else {
+ res.sendStatus(401);
+ }
 });
 ```
 

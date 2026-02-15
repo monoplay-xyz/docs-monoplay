@@ -107,13 +107,13 @@ Define what success and failure mean:
 
 ### Example 1: Movement
 
-❌ **Bad:**
+ **Bad:**
 ```
 Make the character move.
 ```
 *Too vague. No details about how or what.*
 
-✅ **Good:**
+ **Good:**
 ```
 The player controls a knight character using arrow keys. The knight
 should move in 8 directions and have smooth acceleration and deceleration.
@@ -122,13 +122,13 @@ should move in 8 directions and have smooth acceleration and deceleration.
 
 ### Example 2: Combat
 
-❌ **Bad:**
+ **Bad:**
 ```
 Add fighting.
 ```
 *No information about mechanics, inputs, or behavior.*
 
-✅ **Good:**
+ **Good:**
 ```
 Add a sword attack that activates when pressing spacebar. The sword
 swings in an arc in front of the player. Enemies hit by the sword
@@ -138,13 +138,13 @@ take 10 damage and are knocked back slightly.
 
 ### Example 3: Progression
 
-❌ **Bad:**
+ **Bad:**
 ```
 Make levels harder.
 ```
 *Doesn't explain how difficulty increases.*
 
-✅ **Good:**
+ **Good:**
 ```
 Increase enemy spawn rate by 10% every 60 seconds. After 5 minutes,
 enemies gain 50% more health and move 20% faster.
@@ -153,13 +153,13 @@ enemies gain 50% more health and move 20% faster.
 
 ### Example 4: UI
 
-❌ **Bad:**
+ **Bad:**
 ```
 Show the score.
 ```
 *Minimal guidance on presentation.*
 
-✅ **Good:**
+ **Good:**
 ```
 Display the score in the top-right corner using a large bold font.
 When the score increases, briefly scale the text up and play a

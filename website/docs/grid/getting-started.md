@@ -73,21 +73,21 @@ Create `config.yaml`:
 
 ```yaml
 node:
-  name: "My GRID Node"
-  wallet_address: "0xYourWalletAddressHere"
+ name: "My GRID Node"
+ wallet_address: "0xYourWalletAddressHere"
 
 storage:
-  path: "/data/games"
-  max_size_gb: 500
+ path: "/data/games"
+ max_size_gb: 500
 
 network:
-  max_upload_mbps: 100
-  max_download_mbps: 100
-  port: 6881
+ max_upload_mbps: 100
+ max_download_mbps: 100
+ port: 6881
 
 rewards:
-  auto_claim: true
-  claim_threshold_lyth: 50
+ auto_claim: true
+ claim_threshold_lyth: 50
 ```
 
 Replace `0xYourWalletAddressHere` with your actual wallet address.
@@ -96,14 +96,14 @@ Replace `0xYourWalletAddressHere` with your actual wallet address.
 
 ```bash
 docker run -d \
-  --name grid-node \
-  --restart unless-stopped \
-  -v $(pwd)/config.yaml:/config/config.yaml \
-  -v $(pwd)/data:/data \
-  -p 6881:6881 \
-  -p 6881:6881/udp \
-  -p 8080:8080 \
-  monoplay/grid:latest
+ --name grid-node \
+ --restart unless-stopped \
+ -v $(pwd)/config.yaml:/config/config.yaml \
+ -v $(pwd)/data:/data \
+ -p 6881:6881 \
+ -p 6881:6881/udp \
+ -p 8080:8080 \
+ monoplay/grid:latest
 ```
 
 ### 5. Check Status
@@ -199,36 +199,36 @@ sudo systemctl status grid-node
 
 ```yaml
 node:
-  name: "My GRID Node"              # Friendly name (for dashboard only)
-  wallet_address: "0x..."           # REQUIRED: Your wallet address
+ name: "My GRID Node" # Friendly name (for dashboard only)
+ wallet_address: "0x..." # REQUIRED: Your wallet address
 
 storage:
-  path: "/data/games"               # Where to store game files
-  max_size_gb: 500                  # Maximum storage allocation
-  auto_prune: true                  # Delete least popular games when full
+ path: "/data/games" # Where to store game files
+ max_size_gb: 500 # Maximum storage allocation
+ auto_prune: true # Delete least popular games when full
 
 network:
-  max_upload_mbps: 100              # Upload speed limit (0 = unlimited)
-  max_download_mbps: 100            # Download speed limit
-  port: 6881                        # BitTorrent port
+ max_upload_mbps: 100 # Upload speed limit (0 = unlimited)
+ max_download_mbps: 100 # Download speed limit
+ port: 6881 # BitTorrent port
 ```
 
 ### Advanced Settings
 
 ```yaml
 rewards:
-  auto_claim: true                  # Automatically claim rewards
-  claim_threshold_lyth: 50          # Minimum LYTH before claiming
+ auto_claim: true # Automatically claim rewards
+ claim_threshold_lyth: 50 # Minimum LYTH before claiming
 
 content:
-  mode: "auto"                      # auto | manual | all
-  whitelist: []                     # Specific games to seed (manual mode)
-  blacklist: []                     # Games to never seed
+ mode: "auto" # auto | manual | all
+ whitelist: [] # Specific games to seed (manual mode)
+ blacklist: [] # Games to never seed
 
 monitoring:
-  dashboard_port: 8080              # Web dashboard port
-  enable_metrics: true              # Prometheus metrics
-  metrics_port: 9090
+ dashboard_port: 8080 # Web dashboard port
+ enable_metrics: true # Prometheus metrics
+ metrics_port: 9090
 ```
 
 ## Verifying Your Setup
@@ -315,7 +315,7 @@ Check port status: [yougetsignal.com/tools/open-ports/](https://www.yougetsignal
 
 ```yaml
 network:
-  port: 6882
+ port: 6882
 ```
 
 Don't forget to update firewall and router port forwarding.

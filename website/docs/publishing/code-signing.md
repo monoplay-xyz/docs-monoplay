@@ -26,8 +26,8 @@ MonoPlay signs games **on behalf of publishers**:
 2. Publisher authorizes MonoPlay to sign via smart contract
 3. MonoPlay applies its trusted code signing certificate
 4. Game distributed with dual attribution:
-   - **Signer**: MonoPlay Platform
-   - **Publisher**: [Your Studio Name]
+ - **Signer**: MonoPlay Platform
+ - **Publisher**: [Your Studio Name]
 
 Players see: "Published by [Your Studio] via MonoPlay"
 

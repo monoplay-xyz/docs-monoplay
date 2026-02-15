@@ -57,7 +57,7 @@ chmod +x MonoPlayLauncher.AppImage
 **Linux (Debian/Ubuntu):**
 ```bash
 sudo dpkg -i monoplay-launcher_1.0.0_amd64.deb
-sudo apt-get install -f  # Install dependencies if needed
+sudo apt-get install -f # Install dependencies if needed
 monoplay-launcher
 ```
 
@@ -239,12 +239,12 @@ Default: `[MonoPlay Games Folder]/[Game Name]/`
 Example:
 ```
 C:\MonoPlay\Games\
-  ├── CyberRunner2077\
-  │   ├── game.exe
-  │   ├── assets\
-  │   └── saves\
-  ├── SpaceExplorer\
-  └── PixelDungeon\
+ ├── CyberRunner2077\
+ │ ├── game.exe
+ │ ├── assets\
+ │ └── saves\
+ ├── SpaceExplorer\
+ └── PixelDungeon\
 ```
 
 ### Updates
