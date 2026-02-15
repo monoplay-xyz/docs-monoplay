@@ -8,12 +8,13 @@ GRID (Good Reasonable Infrastructure Device) is MonoPlay's decentralized content
 
 ## What is GRID?
 
-GRID is a network of seeder nodes that distribute games via BitTorrent protocol:
+GRID is a network of seeder nodes that distribute encrypted game content through a relay-based CDN:
 
 - **Decentralized**: No single point of failure
 - **Incentivized**: Node operators earn LYTH for bandwidth contribution
-- **Secure**: Only licensed, security-scanned content distributed
-- **Efficient**: Peer-to-peer distribution reduces central infrastructure costs
+- **Encrypted**: Nodes store and relay encrypted content -- they cannot access or play games
+- **Private**: Hub-and-spoke architecture keeps node IPs hidden from players and other nodes
+- **Zero Config**: No port forwarding, no firewall rules -- just plug in and go
 
 Think of it as a blockchain-incentivized CDN specifically for MonoPlay games.
 
@@ -22,19 +23,21 @@ Think of it as a blockchain-incentivized CDN specifically for MonoPlay games.
 ### For Node Operators
 
 1. **Run GRID Software**: Install on Raspberry Pi 5, server, or Docker
-2. **Connect Wallet**: Link Monolythium wallet for reward payments
-3. **Seed Content**: Automatically download and share popular games
+2. **Register with Email**: Complete the setup wizard to register your device with the coordinator
+3. **Seed Content**: The coordinator assigns encrypted game content based on demand in your region
 4. **Earn Rewards**: Receive LYTH based on bandwidth served and uptime
+5. **Set Payout Wallet**: Configure your wallet address in the web portal at grid.monoplay.xyz
 
 ### For Players
 
-When a player downloads a game:
+When a player purchases and downloads a game:
 
-1. MonoPlay Launcher requests game from GRID network
-2. Torrent client connects to nearest available seeders
-3. Game downloaded from multiple nodes simultaneously
-4. Download speed and reliability improved by distributed network
-5. Node operators earn rewards proportional to bandwidth served
+1. MonoPlay backend verifies the player's on-chain license
+2. Player receives a decryption key for the purchased game
+3. MonoPlay Launcher requests encrypted content from GRID Edge Relays
+4. Encrypted chunks downloaded from Edge Relays (never directly from seeder nodes)
+5. Launcher decrypts and installs the game locally
+6. Node operators earn rewards proportional to bandwidth served
 
 ### Content Distribution
 
@@ -44,7 +47,9 @@ GRID only distributes:
 - Content from verified publishers
 - Licensed releases registered on-chain
 
-**GRID is not a generic torrent network.** It exclusively serves MonoPlay-approved content.
+All content is encrypted before distribution. GRID nodes store only encrypted chunks and have no ability to access, play, or extract game content. Only players with valid on-chain licenses receive decryption keys from the MonoPlay backend.
+
+**GRID is not a generic file sharing network.** It exclusively serves MonoPlay-approved, encrypted content.
 
 ## Why Run a GRID Node?
 
@@ -52,7 +57,7 @@ GRID only distributes:
 
 Node operators receive rewards from the SeederRewards contract:
 
-- **Bandwidth rewards**: Earn for data served to players
+- **Bandwidth rewards**: Earn for data served through Edge Relays
 - **Uptime bonuses**: Consistent availability increases earnings
 - **Popularity multipliers**: Hosting in-demand games pays more
 - **Early adopter benefits**: Higher rewards during network growth phase
@@ -76,6 +81,7 @@ Getting started is affordable:
 - **Docker on existing server**: Free if you already have hardware
 - **Minimal bandwidth**: 100+ Mbps recommended but not required
 - **Set-and-forget**: Automated operation, minimal maintenance
+- **No network configuration**: No port forwarding or firewall rules required
 
 ## Network Architecture
 
@@ -93,28 +99,38 @@ GRID supports multiple deployment types:
 - Data center bandwidth
 - Higher earning potential
 
-**Hybrid Players:**
-- Players who also seed
-- Built into MonoPlay Launcher (opt-in)
-- Earn small rewards while gaming
+### Hub-and-Spoke Relay Model
 
-### Content Selection
+GRID uses a hub-and-spoke architecture to protect operator and player privacy:
 
-Nodes don't need to seed all content:
+- **GRID Nodes** connect outbound to the MonoPlay coordinator over TLS
+- **Nodes push** encrypted content to GRID Edge Relays
+- **Players download** from Edge Relays, never directly from seeder nodes
+- **No peer-to-peer connections**: Nodes never connect to each other or to players
+- **No inbound ports needed**: All connections are outbound from the node
 
-- **Automatic mode**: Software selects popular games to maximize earnings
-- **Manual mode**: Choose specific games to seed
-- **Storage limits**: Configure maximum storage allocation
-- **Bandwidth caps**: Set upload limits to protect your internet plan
+This design means node operators do not need to configure port forwarding, UPnP, or firewall rules. The node software handles everything over standard outbound HTTPS connections.
+
+### Content Assignment
+
+The coordinator assigns content to nodes automatically based on:
+
+- **Geographic demand**: Nodes receive content popular in their region
+- **Storage capacity**: Larger nodes receive more content
+- **Network conditions**: Bandwidth and latency influence assignment
+- **Redundancy**: Content replicated across multiple nodes for availability
+
+Operators configure only their storage and bandwidth limits. The coordinator handles all content selection to optimize delivery performance across the network.
 
 ### Network Protocol
 
 Technical details:
 
-- **Protocol**: BitTorrent with extensions for authentication
-- **Tracker**: MonoPlay tracker verifies licenses on-chain
-- **Encryption**: All transfers encrypted with TLS
-- **Authentication**: Nodes sign bandwidth reports for reward claims
+- **Architecture**: Hub-and-spoke relay model with centralized coordinator
+- **Coordinator**: MonoPlay coordinator assigns content, manages node registration, and routes delivery through Edge Relays
+- **Encryption**: All content encrypted at rest and in transit (TLS)
+- **Authentication**: Nodes authenticate with the coordinator; bandwidth reports signed for reward claims
+- **Edge Relays**: Geographically distributed relay points that serve content to players
 
 ## Reward System
 
@@ -132,18 +148,18 @@ Rewards distributed weekly based on contribution metrics.
 
 Your earnings depend on:
 
-1. **Bandwidth Served**: Total MB/GB uploaded to players
-2. **Uptime**: Percentage of time node is online and accessible
+1. **Bandwidth Served**: Total data pushed through Edge Relays
+2. **Uptime**: Percentage of time node is online and connected to the coordinator
 3. **Content Popularity**: High-demand games earn more per MB
 4. **Geographic Location**: Underserved regions receive bonus multipliers
-5. **Network Quality**: Fast, reliable nodes prioritized by clients
+5. **Network Quality**: Fast, reliable nodes prioritized for content assignment
 
 ### Reward Calculation
 
 Simplified formula:
 
 ```
-Reward = (Bandwidth × Popularity × Uptime × Location Bonus) / Total Network Contribution
+Reward = (Bandwidth x Popularity x Uptime x Location Bonus) / Total Network Contribution
 ```
 
 Actual calculation is more complex and performed on-chain by the SeederRewards contract.
@@ -159,13 +175,24 @@ Rewards accrue in the smart contract:
 
 ## Security and Privacy
 
+### Encrypted Content Distribution
+
+GRID nodes only store and relay encrypted game data:
+
+- Games are encrypted before being distributed to the network
+- Nodes cannot decrypt, access, play, or extract game content
+- Only players with valid on-chain licenses receive decryption keys
+- Decryption keys are delivered directly from the MonoPlay backend to the player, never through GRID nodes
+
+This means even if a node's storage is compromised, the game data is unusable without a valid license.
+
 ### Content Verification
 
-GRID only seeds verified content:
+GRID only distributes verified content:
 
-- All games scanned for malware before distribution
-- Torrent hashes registered on-chain via ReleaseRegistry
-- License validation prevents piracy
+- All games scanned for malware before encryption and distribution
+- Content hashes registered on-chain via ReleaseRegistry
+- License validation prevents unauthorized access
 - Security updates pushed automatically
 
 ### Node Security
@@ -173,19 +200,29 @@ GRID only seeds verified content:
 Protect your node:
 
 - GRID software sandboxed from rest of system
-- No direct file system access
+- No direct file system access beyond the configured storage directory
 - Automatic security updates
 - Rate limiting prevents abuse
+- All connections outbound over TLS -- no open ports required
 
 ### Privacy
 
-What's private:
+GRID is designed with operator privacy as a core principle:
 
-- Your IP address is **not** published on-chain
+**Your IP address is never exposed to players or other nodes.** This is a key advantage of the hub-and-spoke relay architecture:
+
+- Node IPs are known only to the MonoPlay coordinator (stored encrypted, never shared)
+- Players download from Edge Relays, not from your node
+- Nodes never connect directly to players or to each other
+- No inbound connections means your node is not discoverable on the open internet
+
+**What's private:**
+
+- Your IP address -- not visible to players, other nodes, or published on-chain
+- Your physical location -- not disclosed beyond what the coordinator needs for content assignment
 - Bandwidth data aggregated, not per-download
-- Wallet address public but not linked to identity
 
-What's public:
+**What's public:**
 
 - Total bandwidth served (not per-game)
 - Node uptime statistics
@@ -198,7 +235,7 @@ Ready to run a GRID node?
 1. **Choose deployment**: [Raspberry Pi](./raspberry-pi.md) or [Docker](./docker.md)
 2. **Review requirements**: [System Requirements](./requirements.md)
 3. **Set up hardware**: Follow deployment guide
-4. **Configure and launch**: Connect wallet, set storage limits
+4. **Register and launch**: Complete setup wizard with email, set storage limits
 5. **Monitor earnings**: Use [Node Dashboard](./dashboard.md)
 
 ## Hardware Recommendations
@@ -232,7 +269,6 @@ Best for maximizing earnings:
 - VPS or dedicated server with 1+ Gbps connection
 - Seed full game library
 - 24/7 uptime
-- $10-50 USD/month hosting cost
 
 See [Requirements](./requirements.md) for specs.
 

@@ -188,20 +188,20 @@ Each game in your library shows:
 
 **How It Works:**
 
-MonoPlay uses the **GRID network** (torrent-based distribution) for downloads:
+MonoPlay uses the **GRID network** for encrypted game distribution:
 
-1. **Fetch Metadata:** The launcher retrieves the game's torrent file
-2. **Find Seeders:** Connects to GRID nodes seeding this game
-3. **Download Chunks:** Downloads pieces from multiple seeders simultaneously
-4. **Verify Integrity:** Each chunk is hash-verified to prevent corruption
-5. **Assemble Game:** Once complete, the launcher unpacks and installs the game
+1. **Fetch Metadata:** Launcher retrieves the game's release info from the MonoPlay backend
+2. **Verify License:** Backend confirms your on-chain license and issues a time-limited decryption key
+3. **Download Encrypted Files:** Launcher downloads encrypted game chunks from GRID Edge Relays
+4. **Decrypt Locally:** Launcher decrypts the files using the license-bound key
+5. **Install Game:** Game is unpacked and installed in a sandbox
 
 **Typical Download Speeds:**
 - Small games (under 5 GB): 2-5 minutes
 - Medium games (5-20 GB): 10-30 minutes
 - Large games (50 GB+): 30-90 minutes
 
-*Speed depends on available seeders and your internet connection.*
+*Speed depends on GRID Edge Relay availability and your internet connection.*
 
 ### Download Queue
 
@@ -314,11 +314,13 @@ For your protection, games run in a **sandboxed environment**:
 - Limited file system access (can't read/write outside game directory)
 - No access to other apps or system files
 - Network access restricted to game servers only
+- Decryption keys are device-bound and time-limited, preventing extraction or sharing
 
 **Why This Matters:**
 - Prevents malicious games from stealing data
 - Isolates crashes (a game crash won't affect your system)
 - Protects save files from corruption
+- Ensures game files cannot be decrypted on unauthorized devices
 
 **Disable Sandbox (Advanced):**
 Settings → Security → "Allow unsandboxed execution" (not recommended)
@@ -441,8 +443,8 @@ Settings → Notifications → Toggle individual notification types
 **Solutions:**
 1. Pause and resume download
 2. Check firewall settings (allow MonoPlay Launcher)
-3. Disable VPN (some VPNs block torrent traffic)
-4. Wait a few minutes (finding seeders can take time)
+3. Check your internet connection and try again
+4. Wait a few minutes (edge relays may be syncing new content)
 
 ### "License verification failed"
 

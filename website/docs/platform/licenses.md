@@ -332,6 +332,11 @@ Seller Receives: 10.8 LYTH (90% of 12)
 
 ### How MonoPlay Prevents Piracy
 
+**Encrypted Distribution:**
+- All games are distributed as encrypted files through the GRID network
+- Game files are encrypted before distribution, and decryption keys are only provided to verified license holders
+- GRID node operators who store and distribute content only handle encrypted data -- they cannot access, play, or extract game content
+
 **On-Chain Verification:**
 - Games require a valid license token to launch
 - Tokens are signed by the MonoPlay smart contract (can't be forged)
@@ -351,6 +356,8 @@ MonoPlay's approach is **not traditional DRM**:
 - No background services or kernel drivers
 - No internet check-ins during gameplay
 - No performance impact
+- Encryption is handled at the distribution layer, not inside the game itself
+- Once decrypted and installed, the game runs without ongoing encryption checks
 - But still requires license verification to launch
 
 ### What If My Wallet is Compromised?

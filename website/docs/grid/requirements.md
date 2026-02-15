@@ -132,8 +132,6 @@ Best suited for data center deployments or dedicated servers.
 - Linode (Reliable, good support)
 - Vultr (Global presence)
 
-**Warning**: Check provider terms for allowed BitTorrent usage.
-
 ### Home Server / NAS
 
 **Example Build:**
@@ -208,9 +206,11 @@ Best suited for data center deployments or dedicated servers.
 
 ## Network Requirements
 
+GRID nodes only make outbound connections -- no inbound ports, port forwarding, or firewall configuration needed. All communication with the coordinator and edge relays uses outbound TLS (HTTPS).
+
 ### Upload Speed (Most Important)
 
-GRID nodes primarily **upload** game files to players:
+GRID nodes push cached content to edge relays:
 
 - **Minimum**: 50 Mbps (6.25 MB/s)
 - **Recommended**: 100 Mbps (12.5 MB/s)
@@ -220,7 +220,7 @@ GRID nodes primarily **upload** game files to players:
 
 ### Download Speed
 
-Initial game downloads from other GRID nodes:
+Initial content downloads from the coordinator:
 
 - **Minimum**: 25 Mbps
 - **Recommended**: 100 Mbps
@@ -251,10 +251,7 @@ Download speed matters less after initial sync.
 - 99%+ uptime ideal
 - Frequent disconnects reduce earnings significantly
 
-**IPv4 vs. IPv6:**
-
-- IPv4 required (most players use IPv4)
-- IPv6 support optional but beneficial
+Both IPv4 and IPv6 are supported.
 
 ## Operating System Support
 
@@ -409,7 +406,7 @@ Operate multiple nodes for increased earnings:
 **Solutions**:
 
 - Check router QoS settings
-- Verify port forwarding (6881)
+- Check coordinator connection in dashboard
 - Test with `iperf3` to rule out hardware issues
 
 ### High CPU Usage

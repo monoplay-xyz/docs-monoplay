@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # Node Dashboard
 
-The GRID node dashboard provides real-time monitoring and management for your seeder node. Access via web browser to view statistics, configure settings, and track earnings.
+The GRID node dashboard provides real-time monitoring and management for your seeder node. Access via web browser to view statistics, configure settings, and track earnings. On first launch, the dashboard also serves as the setup wizard for device registration.
 
 ## Accessing the Dashboard
 
@@ -16,30 +16,23 @@ Or use your node's hostname/IP:
 
 - `http://grid-node.local:8080` (Raspberry Pi)
 - `http://192.168.1.XXX:8080` (by IP address)
-- `http://your-vps-domain.com:8080` (VPS)
 
-### Remote Access (Optional)
+### First-Time Setup
 
-**Warning**: Dashboard has no authentication by default. Enable auth before exposing publicly.
+When you visit the dashboard for the first time, you will see the registration wizard instead of the monitoring interface. The setup flow is:
 
-**Enable authentication:**
+1. **Enter your email address** - Used for your GRID operator account
+2. **Name your device** - Choose a friendly name (e.g., "Living Room Pi")
+3. **Confirm your email** - Click the verification link sent to your inbox
+4. **Configure storage and bandwidth limits** - Set resource allocation
 
-```bash
-# Raspberry Pi
-sudo grid-config set-dashboard-auth
+Once registration is complete, the dashboard switches to the monitoring view described below.
 
-# Docker
-docker exec -it grid-node grid-cli config set-dashboard-auth
-```
+### Remote Access
 
-Enter username and password when prompted.
+After completing email registration, you can manage your node remotely through the **grid.monoplay.xyz** web portal. Log in with the same email you used during setup to view status, adjust settings, and track rewards from any browser — no need to expose your local dashboard to the internet.
 
-**Secure remote access options:**
-
-1. **VPN**: Access via WireGuard/OpenVPN
-2. **SSH tunnel**: `ssh -L 8080:localhost:8080 user@node`
-3. **Reverse proxy**: Nginx/Caddy with HTTPS + auth
-4. **Tailscale**: Zero-config VPN mesh network
+**For local network access**, you can still reach the dashboard at `http://localhost:8080` or via your node's IP on your home network. Since the web portal handles remote management, there is no need to set up VPNs, SSH tunnels, or reverse proxies for remote access.
 
 ## Dashboard Overview
 
@@ -59,7 +52,8 @@ Displays:
 
 - **Node ID**: Unique identifier (grid-xxxxx)
 - **Status**: Online, Offline, or Syncing
-- **Wallet**: Connected address (truncated)
+- **Account**: Registered email address
+- **Payout Wallet**: Your Monolythium address for reward payouts (configured in web portal)
 - **Uptime**: Current session and all-time
 - **Version**: GRID software version
 
@@ -92,7 +86,7 @@ Real-time system metrics:
 **Network**: Current bandwidth usage
 - Upload: Real-time upload speed (Mbps)
 - Download: Real-time download speed (Mbps)
-- Peers: Currently connected peers
+- Relay: Connected edge relay name and status
 
 ### Quick Stats
 
@@ -102,7 +96,6 @@ Real-time system metrics:
 - Total downloaded (GB)
 - Average upload speed
 - Peak upload speed
-- Connected peers (max)
 - Bandwidth efficiency (%)
 
 ## Bandwidth Tab
@@ -111,8 +104,8 @@ Real-time system metrics:
 
 Live bandwidth visualization:
 
-- **Upload** (green line): Data sent to players
-- **Download** (blue line): Data received from network
+- **Upload** (green line): Data pushed to edge relays
+- **Download** (blue line): Data received from coordinator
 - **Time range**: 1 hour, 6 hours, 24 hours, 7 days
 
 **Interaction:**
@@ -125,11 +118,11 @@ Live bandwidth visualization:
 
 **Daily Breakdown**: Last 7 days table
 
-| Date | Uploaded | Downloaded | Peers | Uptime |
-|------|----------|------------|-------|--------|
-| Feb 14 | 142 GB | 8 GB | 47 | 100% |
-| Feb 13 | 156 GB | 12 GB | 52 | 98% |
-| ... | ... | ... | ... | ... |
+| Date | Uploaded | Downloaded | Uptime |
+|------|----------|------------|--------|
+| Feb 14 | 142 GB | 8 GB | 100% |
+| Feb 13 | 156 GB | 12 GB | 98% |
+| ... | ... | ... | ... |
 
 **Monthly Totals**: Last 12 months summary
 
@@ -139,11 +132,10 @@ Live bandwidth visualization:
 - Total downloaded (lifetime)
 - Average daily upload
 - Peak daily upload
-- Total peers served
 
 ### Bandwidth Efficiency
 
-**Efficiency Score**: Upload ÷ Download ratio
+**Efficiency Score**: Upload / Download ratio
 
 - **High (10:1+)**: Excellent, mostly seeding
 - **Medium (3:1 - 10:1)**: Good, balanced operation
@@ -157,20 +149,19 @@ Higher efficiency indicates mature node maximizing earnings.
 
 Table of currently seeded games:
 
-| Game Title | Size | Seeders | Peers | Uploaded | Priority |
-|------------|------|---------|-------|----------|----------|
-| MonoLands v2 | 4.2 GB | 23 | 8 | 142 GB | High |
-| Pixel Quest | 1.8 GB | 45 | 3 | 67 GB | Medium |
-| ... | ... | ... | ... | ... | ... |
+| Game Title | Size | Relay Uploads | Total Uploaded | Priority |
+|------------|------|---------------|----------------|----------|
+| MonoLands v2 | 4.2 GB | 12 | 142 GB | High |
+| Pixel Quest | 1.8 GB | 8 | 67 GB | Medium |
+| ... | ... | ... | ... | ... |
 
 **Columns:**
 
 - **Game Title**: Name with version
 - **Size**: Total game size
-- **Seeders**: Other nodes seeding this game
-- **Peers**: Players currently downloading from you
-- **Uploaded**: Total uploaded for this game (all-time)
-- **Priority**: Popularity score (High/Medium/Low)
+- **Relay Uploads**: Number of times data has been pushed to edge relays for this game
+- **Total Uploaded**: Total data uploaded for this game (all-time)
+- **Priority**: Coordinator-assigned priority based on demand (High/Medium/Low)
 
 **Actions:**
 
@@ -179,22 +170,21 @@ Table of currently seeded games:
 
 ### Download Queue
 
-Games being downloaded:
+Games being downloaded (assigned by coordinator):
 
 | Game Title | Size | Progress | Speed | ETA |
 |------------|------|----------|-------|-----|
 | Space Raiders | 6.4 GB | 34% | 12 MB/s | 6m 23s |
 | ... | ... | ... | ... | ... |
 
-**Auto-selection** adds games to queue based on popularity and earnings potential.
+The coordinator assigns new content to your node based on geographic demand, your available storage, and network conditions.
 
 ### Content Library
 
-Full catalog of available games:
+Catalog of games assigned to your node:
 
-- Browse all games
-- Filter by genre, size, popularity
-- Manually add to download queue (manual mode only)
+- Browse assigned games
+- Filter by genre, size, priority
 - View game details
 
 ## Rewards Tab
@@ -208,7 +198,6 @@ Full catalog of available games:
 
 - Bandwidth: 124.3 GB uploaded
 - Uptime: 98.2%
-- Average peers: 42
 - Quality score: 96%
 
 **Estimated Reward**: 18.7 LYTH
@@ -269,7 +258,7 @@ Visual earnings over time:
 **Basic Settings:**
 
 - **Node Name**: Friendly name for dashboard
-- **Wallet Address**: Your Monolythium address (requires restart)
+- **Payout Wallet**: Your Monolythium address for reward payouts (set in web portal at grid.monoplay.xyz)
 - **Region**: Auto-detected or manual override
 
 **Storage Settings:**
@@ -283,20 +272,13 @@ Visual earnings over time:
 
 - **Max Upload**: Speed limit (Mbps, 0 = unlimited)
 - **Max Download**: Speed limit (Mbps)
-- **Max Connections**: Concurrent peers limit
-- **Port**: BitTorrent port (requires firewall update)
+- **Max Connections**: Concurrent relay connections limit
 
 **Reward Settings:**
 
 - **Auto-Claim**: Enable/disable automatic claiming
 - **Claim Threshold**: Minimum LYTH before claiming
 - **Claim Interval**: Hours between auto-claims
-
-**Content Settings:**
-
-- **Mode**: Auto, Manual, or All
-- **Prefer New Releases**: Prioritize new games
-- **Auto-Select Count**: Max games to auto-download
 
 ### Advanced Settings
 
@@ -315,9 +297,6 @@ Visual earnings over time:
 **Performance:**
 
 - Bandwidth reporting interval
-- Peer discovery method
-- DHT participation
-- UPnP port mapping
 
 ### System Actions
 
@@ -335,14 +314,14 @@ Configure alerts for important events:
 
 **Notification Types:**
 
-- **Critical**: Node offline, wallet disconnected
+- **Critical**: Node offline, relay disconnected
 - **Warning**: Low storage, high resource usage
 - **Info**: Rewards claimable, updates available
 
 **Delivery Methods:**
 
 - **Browser**: Web notifications (requires permission)
-- **Email**: Send to configured address
+- **Email**: Send to registered address
 - **Webhook**: Discord, Slack, custom endpoint
 
 **Example Webhook (Discord):**
@@ -442,13 +421,13 @@ Ensure port 8080 isn't blocked locally.
 
 **Restart service** to refresh metrics
 
-### "Wallet not connected"
+### "Account not connected"
 
-**Verify wallet address** in config
+**Verify email registration** was completed
 
 **Check Monolythium RPC** is accessible
 
-**Ensure LYTH balance** for gas fees
+**Ensure payout wallet** is configured in web portal
 
 ## Performance Tips
 

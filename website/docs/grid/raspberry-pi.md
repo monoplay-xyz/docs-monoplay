@@ -201,32 +201,11 @@ Installation takes 5-10 minutes.
 
 ### 4. Initial Configuration
 
-```bash
-# Set your wallet address
-sudo grid-config set-wallet 0xYourWalletAddressHere
+Visit `http://grid-node.local:8080` in your browser. Complete the setup wizard: enter your email, set a device name, and confirm your email. Your node will register with the coordinator and start seeding automatically.
 
-# Set storage limit (adjust for your storage size)
-# Raspberry Pi with 128 GB: use ~100 GB
-# Raspberry Pi with 500 GB NVMe: use ~450 GB
-sudo grid-config set-storage 450GB
+To configure wallet address, storage limits, and bandwidth, log into [grid.monoplay.xyz](https://grid.monoplay.xyz) after registration.
 
-# Set upload bandwidth limit (optional, recommended for home)
-# 0 = unlimited (use full connection)
-# Or limit to protect other devices:
-sudo grid-config set-upload 80 # 80 Mbps
-
-# Set friendly name
-sudo grid-config set-name "My Pi GRID Node"
-```
-
-### 5. Start GRID Service
-
-```bash
-sudo systemctl start grid-node
-sudo systemctl enable grid-node # Start on boot
-```
-
-### 6. Verify Operation
+### 5. Verify Operation
 
 ```bash
 # Check service status
@@ -243,100 +222,27 @@ Expected output:
 
 ```
 Node ID: grid-rpi5-abc123
-Wallet: 0xYour... (connected)
 Status: Online
+Coordinator: connected
 Platform: Raspberry Pi 5 (8 GB)
 Storage: 24.1 GB / 450 GB (5%)
-Seeding: 4 games
+Caching: 4 games (encrypted)
 Bandwidth (24h): ↑ 18.2 GB ↓ 1.4 GB
 Pending Rewards: 0.8 LYTH
 Uptime: 1h 23m
 ```
 
-## Network Configuration
-
-### Port Forwarding
-
-Forward port 6881 (TCP + UDP) to your Pi:
-
-1. Log into your router admin panel
-2. Navigate to Port Forwarding / NAT settings
-3. Add rule:
- - **External Port**: 6881
- - **Internal Port**: 6881
- - **Protocol**: TCP + UDP
- - **Internal IP**: 192.168.1.XXX (your Pi's IP)
- - **Description**: GRID Node
-
-4. Save and apply
-
-### Static IP Assignment
-
-Prevent IP address changes:
-
-**Option 1: Router DHCP Reservation (Recommended)**
-
-1. In router settings, find DHCP reservations
-2. Add reservation for Pi's MAC address
-3. Assign fixed IP (e.g., 192.168.1.100)
-
-**Option 2: Static IP on Pi**
-
-Edit netplan config:
-
-```bash
-sudo nano /etc/netplan/50-cloud-init.yaml
-```
-
-```yaml
-network:
- version: 2
- ethernets:
- eth0:
- addresses:
- - 192.168.1.100/24
- gateway4: 192.168.1.1
- nameservers:
- addresses:
- - 8.8.8.8
- - 1.1.1.1
-```
-
-Apply:
-
-```bash
-sudo netplan apply
-```
-
-### Test Port Accessibility
-
-```bash
-# Install netcat
-sudo apt install netcat -y
-
-# Test from another device
-nc -zv <pi-ip-address> 6881
-```
-
-Or use online tool: [portchecker.co](https://portchecker.co)
-
 ## Dashboard Access
 
-Access the web dashboard:
+Access the web dashboard at `http://grid-node.local:8080` (or `http://192.168.1.XXX:8080`).
 
-**From local network:**
-`http://grid-node.local:8080`
-
-**Or by IP:**
-`http://192.168.1.XXX:8080`
-
-**Dashboard features:**
+On first visit, the dashboard presents the setup wizard for initial registration. After setup is complete, the dashboard shows:
 
 - Real-time bandwidth graphs
-- Seeding status (games, sizes, peers)
+- Caching status (games, sizes)
 - Earnings tracker
 - System health (CPU, RAM, temperature)
-- Configuration editor
+- Coordinator connection status
 
 ### Secure Dashboard (Optional)
 
@@ -489,16 +395,16 @@ sudo sysctl -p
 sudo journalctl -u grid-node -n 100
 
 # Common issues:
-# - Wallet address not set
+# - Setup wizard not completed (visit http://grid-node.local:8080)
 # - Storage path doesn't exist
-# - Port 6881 already in use
+# - Insufficient disk space
 ```
 
 ### Low Earnings
 
-1. Verify port 6881 is forwarded and accessible
+1. Verify node is connected to coordinator (check dashboard)
 2. Check uptime: `sudo grid-cli status`
-3. Increase storage allocation
+3. Increase storage allocation via [grid.monoplay.xyz](https://grid.monoplay.xyz)
 4. Ensure 24/7 operation (disable sleep/power management)
 5. Upgrade to NVMe for better performance
 
@@ -534,13 +440,45 @@ Run several Pis for increased earnings:
 - Distribute physically for redundancy
 - Stagger update schedules
 
-### VPN/Proxy (Not Recommended)
+## Tips
 
-GRID works through VPN but may impact earnings:
+### Static IP Assignment
 
-- Incorrect geographic location reported
-- Increased latency
-- Some VPNs block BitTorrent
+Assigning a static IP to your Pi prevents the local address from changing, which keeps the dashboard URL consistent.
+
+**Option 1: Router DHCP Reservation (Recommended)**
+
+1. In router settings, find DHCP reservations
+2. Add reservation for Pi's MAC address
+3. Assign fixed IP (e.g., 192.168.1.100)
+
+**Option 2: Static IP on Pi**
+
+Edit netplan config:
+
+```bash
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+```yaml
+network:
+ version: 2
+ ethernets:
+ eth0:
+ addresses:
+ - 192.168.1.100/24
+ gateway4: 192.168.1.1
+ nameservers:
+ addresses:
+ - 8.8.8.8
+ - 1.1.1.1
+```
+
+Apply:
+
+```bash
+sudo netplan apply
+```
 
 ## Backing Up Your Node
 

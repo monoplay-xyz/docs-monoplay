@@ -10,11 +10,11 @@ Common questions about MonoPlay, organized by topic.
 
 ### What is MonoPlay?
 
-MonoPlay is a decentralized game distribution platform built on the Monolythium blockchain. Publishers submit games, security scanners verify safety, and games are distributed via a peer-to-peer network (GRID). Players purchase licenses as on-chain NFTs and download games directly from the network.
+MonoPlay is a decentralized game distribution platform built on the Monolythium blockchain. Publishers submit games, security scanners verify safety, and games are distributed as encrypted content via the GRID network's edge relays. Players purchase licenses as on-chain NFTs and download games from GRID Edge Relays.
 
 ### How is MonoPlay different from Steam or Epic Games Store?
 
-**Decentralization**: Games distributed via peer-to-peer GRID network, not centralized servers.
+**Decentralization**: Games distributed as encrypted content via GRID Edge Relays, not centralized servers.
 
 **Blockchain**: Licenses are NFTs, enabling true ownership and resale.
 
@@ -127,7 +127,7 @@ Most games default to single-user.
 - Play indefinitely
 - Transfer your license to others
 
-GRID continues seeding delisted games for existing license holders.
+GRID Edge Relays continue serving delisted games to existing license holders.
 
 ### Are games DRM-free?
 
@@ -149,7 +149,7 @@ Via **MonoPlay Launcher** (available for Windows, macOS, Linux):
 2. Log in with wallet
 3. Navigate to Library (shows owned licenses)
 4. Click "Install" on game
-5. Game downloads from GRID network
+5. Encrypted game files download from GRID Edge Relays, then decrypt locally with your license key
 6. Play!
 
 ### How fast are downloads?
@@ -190,20 +190,26 @@ Yes:
 
 ### What is GRID?
 
-GRID (Good Reasonable Infrastructure Device) is the peer-to-peer network that distributes games. Operators run nodes and earn LYTH rewards for seeding games to players.
+GRID (Good Reasonable Infrastructure Device) is the network that distributes encrypted game content. Operators run nodes that store encrypted game chunks and push them to edge relays. Players download from these relays. Operators earn LYTH rewards for contributing bandwidth and storage.
 
 See [GRID Overview](../grid/overview.md).
 
 ### Is GRID just BitTorrent?
 
-Based on BitTorrent but with key differences:
+No. GRID uses a relay-based architecture. Nodes store encrypted game chunks and push content to GRID Edge Relays. Players download from these relays. Unlike BitTorrent, there are no direct peer-to-peer connections -- your IP is never exposed to other players or nodes.
 
+Key differences from BitTorrent:
+
+- **Relay-based**: No direct peer connections; all transfers go through edge relays
+- **Encrypted content**: Nodes only handle encrypted data; decryption keys issued to license holders
 - **Licensed content only**: No piracy
 - **Blockchain incentives**: Earn LYTH for seeding
 - **Security**: All content scanned before distribution
-- **Smart tracker**: Verifies licenses on-chain
+- **Coordinator-assigned**: Content is assigned to nodes automatically for optimal coverage
 
 ### Why not use centralized CDN?
+
+GRID provides CDN-like reliability through edge relays while keeping infrastructure costs distributed across community operators.
 
 **Decentralization benefits**:
 
@@ -369,7 +375,7 @@ See [Privacy Policy](https://monoplay.xyz/privacy).
 **Check**:
 
 1. Internet connection speed (speedtest.net)
-2. Number of seeders (game page shows)
+2. Edge relay availability (game page shows status)
 3. Background downloads (pause other apps)
 4. VPN/proxy (can slow connections)
 

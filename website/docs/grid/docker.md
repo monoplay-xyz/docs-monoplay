@@ -52,7 +52,6 @@ Create `config/config.yaml`:
 ```yaml
 node:
  name: "My GRID Node"
- wallet_address: "0xYourWalletAddressHere"
 
 storage:
  path: "/data/games"
@@ -62,7 +61,6 @@ storage:
 network:
  max_upload_mbps: 100 # 0 = unlimited
  max_download_mbps: 100
- port: 6881
 
 rewards:
  auto_claim: true
@@ -74,7 +72,7 @@ monitoring:
  metrics_port: 9090
 ```
 
-**Important**: Replace `0xYourWalletAddressHere` with your actual Monolythium wallet address.
+**Note**: Wallet address and other account settings are configured through the web portal at [grid.monoplay.xyz](https://grid.monoplay.xyz) after initial setup.
 
 ### 4. Run GRID Container
 
@@ -84,12 +82,12 @@ docker run -d \
  --restart unless-stopped \
  -v $(pwd)/config:/config \
  -v $(pwd)/data:/data \
- -p 6881:6881 \
- -p 6881:6881/udp \
  -p 8080:8080 \
  -p 9090:9090 \
  monoplay/grid:latest
 ```
+
+After starting, visit `http://localhost:8080` to complete the setup wizard (register email, set device name). Your node will connect to the coordinator and begin seeding automatically.
 
 ### 5. Verify Operation
 
@@ -102,16 +100,13 @@ Expected output:
 ```
 [INFO] MonoPlay GRID Node v1.2.0
 [INFO] Loading configuration from /config/config.yaml
-[INFO] Wallet: 0xYour... (connected)
 [INFO] Storage: 500 GB allocated, 498 GB available
 [INFO] Network: Max upload 100 Mbps, max download 100 Mbps
-[INFO] Connecting to MonoPlay tracker...
+[INFO] Connecting to coordinator...
 [INFO] Connected! Node ID: grid-docker-a1b2c3
-[INFO] Downloading content manifest...
-[INFO] Manifest received: 156 games available
-[INFO] Auto-selecting games for maximum earnings...
-[INFO] Queued 8 games for download (42.3 GB)
-[INFO] Starting seeding service...
+[INFO] Receiving content assignments...
+[INFO] Assigned 8 games (42.3 GB encrypted)
+[INFO] Downloading content chunks...
 [INFO] Dashboard available at http://localhost:8080
 [INFO] Node online and earning rewards!
 ```
@@ -131,8 +126,6 @@ services:
  container_name: grid-node
  restart: unless-stopped
  ports:
- - "6881:6881"
- - "6881:6881/udp"
  - "8080:8080"
  - "9090:9090"
  volumes:
@@ -180,9 +173,10 @@ docker-compose up -d
 ```yaml
 node:
  name: "My GRID Node" # Display name (dashboard only)
- wallet_address: "0x..." # REQUIRED: Your Monolythium address
  region: "auto" # auto | na-east | eu-west | ap-southeast
 ```
+
+Wallet address is configured through the web portal at [grid.monoplay.xyz](https://grid.monoplay.xyz) as a payout setting.
 
 ### Storage Settings
 
@@ -201,10 +195,9 @@ storage:
 network:
  max_upload_mbps: 100 # Upload speed limit (0 = unlimited)
  max_download_mbps: 100 # Download speed limit
- port: 6881 # BitTorrent port
- max_connections: 200 # Maximum concurrent peers
- max_upload_slots: 50 # Maximum upload slots
 ```
+
+GRID nodes only make outbound TLS connections to the coordinator and edge relays. No inbound ports or firewall configuration required.
 
 ### Rewards Settings
 
@@ -219,18 +212,10 @@ rewards:
 
 ```yaml
 content:
- mode: "auto" # auto | manual | all
- whitelist: [] # Games to always seed (manual mode)
- blacklist: [] # Games to never seed
- auto_select_count: 10 # Max games to auto-select
- prefer_new_releases: true # Prioritize new games
+ blacklist: [] # Content categories to exclude (e.g., ["mature"])
 ```
 
-**Modes:**
-
-- **auto**: Software selects games for maximum earnings
-- **manual**: Only seed games in whitelist
-- **all**: Seed entire catalog (requires 2+ TB storage)
+Content is assigned automatically by the coordinator based on network demand, node capacity, and geographic location. Operators can use the `blacklist` to exclude specific content categories they do not want to cache.
 
 ### Monitoring Settings
 
@@ -297,7 +282,6 @@ services:
  grid-node:
  # ...
  environment:
- - GRID_WALLET=0xYourWalletAddress
  - GRID_STORAGE_MAX_GB=500
  - GRID_UPLOAD_LIMIT_MBPS=100
  - GRID_LOG_LEVEL=info
@@ -375,7 +359,7 @@ Access at `http://localhost:8080`
 Features:
 
 - Real-time bandwidth graphs
-- Seeding status and peer counts
+- Caching status and coordinator connection
 - Earnings tracker
 - System health metrics
 - Configuration editor
@@ -388,8 +372,8 @@ Metrics available at `http://localhost:9090/metrics`
 
 - `grid_bandwidth_upload_bytes_total`
 - `grid_bandwidth_download_bytes_total`
-- `grid_games_seeding_count`
-- `grid_peers_connected`
+- `grid_games_caching_count`
+- `grid_coordinator_connected`
 - `grid_rewards_pending_lyth`
 - `grid_storage_used_bytes`
 
@@ -408,42 +392,11 @@ Response:
  "status": "healthy",
  "node_id": "grid-docker-a1b2c3",
  "uptime_seconds": 86400,
- "seeding_games": 8,
- "connected_peers": 42,
- "wallet_connected": true
+ "caching_games": 8,
+ "coordinator_connected": true,
+ "wallet_configured": true
 }
 ```
-
-## Firewall Configuration
-
-Ensure port 6881 is accessible from the internet.
-
-**Linux (UFW):**
-
-```bash
-sudo ufw allow 6881/tcp
-sudo ufw allow 6881/udp
-```
-
-**Linux (iptables):**
-
-```bash
-sudo iptables -A INPUT -p tcp --dport 6881 -j ACCEPT
-sudo iptables -A INPUT -p udp --dport 6881 -j ACCEPT
-sudo iptables-save | sudo tee /etc/iptables/rules.v4
-```
-
-**macOS:**
-
-System Preferences > Security & Privacy > Firewall > Firewall Options > Add Docker
-
-**Windows (WSL2):**
-
-Windows Firewall > Advanced Settings > Inbound Rules > New Rule > Port 6881
-
-**Cloud VPS:**
-
-Configure security groups/firewall rules in provider dashboard to allow port 6881.
 
 ## Troubleshooting
 
@@ -454,18 +407,9 @@ Configure security groups/firewall rules in provider dashboard to allow port 688
 docker logs grid-node
 
 # Common issues:
-# - Port 6881 already in use
-# - Invalid wallet address
 # - Config file syntax errors
-```
-
-### Port Already in Use
-
-```bash
-# Find process using port
-sudo lsof -i :6881
-
-# Kill process or change GRID port in config.yaml
+# - Insufficient disk space
+# - Setup wizard not completed (visit http://localhost:8080)
 ```
 
 ### Permission Denied Errors
@@ -494,15 +438,15 @@ docker update --memory 4g --memory-swap 4g grid-node
 docker exec grid-node ping -c 3 monoplay.xyz
 
 # Check DNS resolution
-docker exec grid-node nslookup tracker.monoplay.xyz
+docker exec grid-node nslookup coordinator.monoplay.xyz
 
-# Verify port accessibility
-curl -s https://portchecker.co/check?port=6881
+# Check coordinator connection
+docker exec grid-node grid-cli status
 ```
 
 ### Low Earnings
 
-1. Verify port 6881 is accessible externally
+1. Verify node is connected to coordinator (check dashboard at http://localhost:8080)
 2. Check upload bandwidth isn't capped too low
 3. Increase storage allocation
 4. Ensure 24/7 uptime
@@ -560,8 +504,6 @@ services:
  - no-new-privileges:true
  cap_drop:
  - ALL
- cap_add:
- - NET_BIND_SERVICE
  read_only: false # GRID needs write access to /data
 ```
 
@@ -633,8 +575,8 @@ Run multiple GRID nodes on one host:
 # Create separate directories
 mkdir -p ~/grid-node-1 ~/grid-node-2
 
-# Use different configs (different wallets)
-# Use different ports (6881, 6882, etc.)
+# Use different configs (different email accounts)
+# Use different dashboard ports
 ```
 
 **Docker Compose for multiple nodes:**
@@ -644,15 +586,15 @@ services:
  grid-node-1:
  container_name: grid-node-1
  ports:
- - "6881:6881"
  - "8081:8080"
+ - "9091:9090"
  # ...
 
  grid-node-2:
  container_name: grid-node-2
  ports:
- - "6882:6881"
  - "8082:8080"
+ - "9092:9090"
  # ...
 ```
 

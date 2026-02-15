@@ -13,8 +13,9 @@ Before starting, you'll need:
 - **Hardware**: Raspberry Pi 5 or server capable of running Docker
 - **Internet**: 100+ Mbps connection (upload speed most important)
 - **Storage**: At least 100 GB free space (500 GB+ recommended)
-- **Wallet**: Monolythium-compatible wallet with small amount of LYTH for gas fees
-- **Email**: For node registration and notifications
+- **Email**: For device registration and account management
+
+A wallet address is not required at setup. You can configure your LYTH payout wallet later through the web portal at grid.monoplay.xyz.
 
 ## Installation Methods
 
@@ -28,7 +29,7 @@ Best for home users wanting a simple, energy-efficient setup.
 **Skill level**: Beginner
 **Cost**: $100-150 USD
 
-[Full Raspberry Pi Guide →](./raspberry-pi.md)
+[Full Raspberry Pi Guide -->](./raspberry-pi.md)
 
 ### Option 2: Docker (Recommended for Advanced Users)
 
@@ -38,7 +39,7 @@ Best for those with existing servers or technical experience.
 **Skill level**: Intermediate
 **Cost**: Free (if using existing hardware)
 
-[Full Docker Guide →](./docker.md)
+[Full Docker Guide -->](./docker.md)
 
 ## Quick Start (Docker)
 
@@ -73,40 +74,45 @@ Create `config.yaml`:
 
 ```yaml
 node:
- name: "My GRID Node"
- wallet_address: "0xYourWalletAddressHere"
+  name: "My GRID Node"
 
 storage:
- path: "/data/games"
- max_size_gb: 500
+  path: "/data/games"
+  max_size_gb: 500
 
 network:
- max_upload_mbps: 100
- max_download_mbps: 100
- port: 6881
+  max_upload_mbps: 100
+  max_download_mbps: 100
 
 rewards:
- auto_claim: true
- claim_threshold_lyth: 50
+  auto_claim: true
+  claim_threshold_lyth: 50
 ```
-
-Replace `0xYourWalletAddressHere` with your actual wallet address.
 
 ### 4. Start Node
 
 ```bash
 docker run -d \
- --name grid-node \
- --restart unless-stopped \
- -v $(pwd)/config.yaml:/config/config.yaml \
- -v $(pwd)/data:/data \
- -p 6881:6881 \
- -p 6881:6881/udp \
- -p 8080:8080 \
- monoplay/grid:latest
+  --name grid-node \
+  --restart unless-stopped \
+  -v $(pwd)/config.yaml:/config/config.yaml \
+  -v $(pwd)/data:/data \
+  -p 8080:8080 \
+  monoplay/grid:latest
 ```
 
-### 5. Check Status
+No inbound ports are required. Port 8080 is only for the local setup wizard and dashboard.
+
+### 5. Complete Setup Wizard
+
+Visit `http://localhost:8080` in your browser to complete the setup wizard:
+
+1. Enter your email address
+2. Set a device name
+3. Confirm your email (check inbox for verification link)
+4. Device registers with the coordinator and begins seeding automatically
+
+### 6. Check Status
 
 ```bash
 docker logs grid-node
@@ -116,18 +122,22 @@ You should see:
 
 ```
 [INFO] GRID Node starting...
-[INFO] Wallet: 0xYour...
 [INFO] Storage: 500 GB available
-[INFO] Connecting to MonoPlay tracker...
+[INFO] Connecting to MonoPlay coordinator...
 [INFO] Connected! Node ID: grid-xxxxx
-[INFO] Downloading content manifest...
+[INFO] Receiving content assignments...
 [INFO] Seeding 3 games (12.4 GB)
 [INFO] Node online and earning rewards!
 ```
 
-### 6. Access Dashboard
+### 7. Remote Management
 
-Open your browser to `http://localhost:8080` to view the node dashboard.
+After setup, manage your node remotely at [grid.monoplay.xyz](https://grid.monoplay.xyz). Log in with your email to:
+
+- View node status and earnings
+- Set your LYTH payout wallet address
+- Adjust storage and bandwidth limits
+- Claim rewards
 
 ## Quick Start (Raspberry Pi 5)
 
@@ -166,13 +176,7 @@ The script will:
 - Configure automatic updates
 - Start GRID service
 
-### 4. Configure Wallet
-
-```bash
-sudo grid-config set-wallet 0xYourWalletAddressHere
-```
-
-### 5. Set Storage Limit
+### 4. Set Storage Limit
 
 ```bash
 sudo grid-config set-storage 100GB
@@ -180,12 +184,23 @@ sudo grid-config set-storage 100GB
 
 Adjust based on your microSD card size (leave 20% free space).
 
-### 6. Start Seeding
+### 5. Start Node
 
 ```bash
 sudo systemctl start grid-node
 sudo systemctl enable grid-node
 ```
+
+### 6. Complete Setup Wizard
+
+The device broadcasts itself on your local network as `monoplay-grid.local`. Visit `http://monoplay-grid.local:8080` (or `http://raspberrypi.local:8080`) in your browser to complete setup:
+
+1. Enter your email address
+2. Set a device name
+3. Confirm your email (check inbox for verification link)
+4. Device registers with the coordinator and begins seeding automatically
+
+After setup, manage your node remotely at [grid.monoplay.xyz](https://grid.monoplay.xyz).
 
 ### 7. Check Status
 
@@ -199,37 +214,35 @@ sudo systemctl status grid-node
 
 ```yaml
 node:
- name: "My GRID Node" # Friendly name (for dashboard only)
- wallet_address: "0x..." # REQUIRED: Your wallet address
+  name: "My GRID Node"       # Friendly name (shown in web portal)
 
 storage:
- path: "/data/games" # Where to store game files
- max_size_gb: 500 # Maximum storage allocation
- auto_prune: true # Delete least popular games when full
+  path: "/data/games"        # Where to store encrypted game content
+  max_size_gb: 500           # Maximum storage allocation
+  auto_prune: true           # Remove least-needed content when full
 
 network:
- max_upload_mbps: 100 # Upload speed limit (0 = unlimited)
- max_download_mbps: 100 # Download speed limit
- port: 6881 # BitTorrent port
+  max_upload_mbps: 100       # Upload speed limit (0 = unlimited)
+  max_download_mbps: 100     # Download speed limit
 ```
 
 ### Advanced Settings
 
 ```yaml
 rewards:
- auto_claim: true # Automatically claim rewards
- claim_threshold_lyth: 50 # Minimum LYTH before claiming
+  auto_claim: true           # Automatically claim rewards
+  claim_threshold_lyth: 50   # Minimum LYTH before claiming
 
 content:
- mode: "auto" # auto | manual | all
- whitelist: [] # Specific games to seed (manual mode)
- blacklist: [] # Games to never seed
+  mode: "auto"               # Coordinator assigns content automatically
 
 monitoring:
- dashboard_port: 8080 # Web dashboard port
- enable_metrics: true # Prometheus metrics
- metrics_port: 9090
+  dashboard_port: 8080       # Web dashboard / setup wizard port
+  enable_metrics: true       # Prometheus metrics
+  metrics_port: 9090
 ```
+
+Content assignment is handled by the coordinator. The `auto` mode is the default and only supported mode -- the coordinator distributes encrypted game content based on geographic demand, your node's storage capacity, and network conditions.
 
 ## Verifying Your Setup
 
@@ -247,7 +260,7 @@ docker logs grid-node --tail 100
 sudo journalctl -u grid-node -n 100 -f
 ```
 
-### Verify Wallet Connection
+### Check Connection
 
 ```bash
 # Docker
@@ -261,11 +274,11 @@ Expected output:
 
 ```
 Node ID: grid-a1b2c3d4e5f6
-Wallet: 0xYour... (connected)
 Status: Online
+Connected to coordinator: yes
 Uptime: 2h 34m
 Seeding: 5 games (24.6 GB)
-Bandwidth (24h): ↑ 142 GB ↓ 8 GB
+Bandwidth (24h): 142 GB served
 Pending Rewards: 12.4 LYTH
 ```
 
@@ -275,50 +288,20 @@ Pending Rewards: 12.4 LYTH
 Open `http://localhost:8080`
 
 **Raspberry Pi:**
-Open `http://raspberrypi.local:8080`
+Open `http://monoplay-grid.local:8080` or `http://raspberrypi.local:8080`
 
 You should see the GRID node dashboard with real-time statistics.
 
-## Firewall Configuration
-
-Ensure port 6881 is accessible from the internet:
-
-**Linux (ufw):**
-
-```bash
-sudo ufw allow 6881/tcp
-sudo ufw allow 6881/udp
-```
-
-**Router:**
-
-Forward port 6881 TCP+UDP to your node's local IP address.
-
-Check port status: [yougetsignal.com/tools/open-ports/](https://www.yougetsignal.com/tools/open-ports/)
-
 ## Common Issues
 
-### "Wallet connection failed"
+### "Email verification failed"
 
 **Solution:**
 
-- Verify wallet address is valid Monolythium address
-- Ensure you have small amount of LYTH for gas fees
+- Check your spam/junk folder for the verification email
+- Ensure you entered the correct email address
+- Try resending verification from the setup wizard
 - Check network connectivity
-
-### "Port 6881 already in use"
-
-**Solution:**
-
-- Stop other torrent clients
-- Or change GRID port in config.yaml:
-
-```yaml
-network:
- port: 6882
-```
-
-Don't forget to update firewall and router port forwarding.
 
 ### "Storage path not writable"
 
@@ -338,9 +321,17 @@ sudo chown -R grid:grid /var/lib/grid
 
 **Possible causes:**
 
-- Network still downloading content manifest (wait 5-10 minutes)
+- Node still receiving content assignments from the coordinator (wait 5-10 minutes)
 - Storage limit too low (increase max_size_gb)
-- Network connectivity issues (check firewall)
+- Network connectivity issues
+
+### "Cannot connect to coordinator"
+
+**Solution:**
+
+- Verify internet connectivity
+- Check that outbound HTTPS (port 443) is not blocked by your network
+- Try restarting the node
 
 ## Monitoring Your Node
 
@@ -352,7 +343,7 @@ The web dashboard shows:
 - Games currently seeding
 - Pending and claimed rewards
 - Node uptime and health
-- Connected peers
+- Coordinator connection status
 
 ### Command-Line Monitoring
 
@@ -382,6 +373,7 @@ Node running successfully? Optimize your setup:
 
 - **Increase storage** for more earning potential
 - **Monitor dashboard** to understand performance
+- **Set payout wallet** at grid.monoplay.xyz to receive LYTH rewards
 - **Review rewards** system to maximize earnings
 - **Join Discord** to connect with other operators
 

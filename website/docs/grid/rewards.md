@@ -22,7 +22,7 @@ Total annual pool (current): ~8-12 million LYTH
 
 Rewards distributed proportionally based on:
 
-1. **Bandwidth contributed**: GB uploaded to players
+1. **Bandwidth contributed**: GB of encrypted content pushed to edge relays
 2. **Uptime**: Percentage of time online and accessible
 3. **Content popularity**: High-demand games earn more per GB
 4. **Geographic location**: Underserved regions receive bonuses
@@ -45,12 +45,12 @@ Score = Bandwidth × Uptime × Popularity × Location × Quality
 **Components:**
 
 **Bandwidth (40% weight)**
-- Total GB uploaded to players in the epoch
+- Total GB of encrypted content pushed to edge relays in the epoch
 - Measured via cryptographically signed bandwidth proofs
 
 **Uptime (20% weight)**
 - Percentage of epoch online and connectable
-- Verified via random connectivity checks
+- Verified via heartbeat to coordinator
 
 **Popularity (20% weight)**
 - Weighted by demand for content you're seeding
@@ -61,9 +61,8 @@ Score = Bandwidth × Uptime × Popularity × Location × Quality
 - Regions with fewer seeders receive 1.2-2.0× multiplier
 
 **Quality (10% weight)**
-- Average download speed provided to peers
-- Connection success rate
-- Peer satisfaction score
+- Transfer speed to edge relays
+- Relay upload success rate
 
 ### Example Calculation
 
@@ -207,7 +206,7 @@ Target 99%+ uptime for maximum rewards.
 
 ### 3. Increase Upload Bandwidth
 
-More bandwidth = serve more peers = higher earnings.
+More bandwidth = push more content to edge relays = higher earnings.
 
 **Bandwidth vs. Earnings** (approximate):
 
@@ -224,7 +223,7 @@ More bandwidth = serve more peers = higher earnings.
 
 ### 4. Seed Popular Content
 
-Let auto-selection mode choose high-demand games:
+The coordinator automatically assigns content to your node to maximize network coverage and your earnings. No manual content selection is needed.
 
 ```yaml
 content:
@@ -232,13 +231,13 @@ content:
  prefer_new_releases: true
 ```
 
-Auto-selection algorithm prioritizes:
+The coordinator's assignment algorithm prioritizes:
 
-- New game releases (first 30 days: 2.0× multiplier)
+- New game releases (first 30 days: 2.0x multiplier)
 - Trending games (high download volume)
-- Content with few existing seeders
+- Content with few existing seeders in your region
 
-**Manual selection** can work if you identify popular games, but auto-mode generally performs better.
+By keeping your node online and offering more storage, the coordinator assigns higher-value content to your node automatically.
 
 ### 5. Strategic Geographic Location
 
@@ -262,8 +261,8 @@ Provide fast, reliable service:
 **Quality Factors:**
 
 - **Low latency**: Keep ping under 100ms
-- **Fast transfers**: Maximize upload speed per peer
-- **High availability**: Always respond to connection requests
+- **Fast transfers**: Maximize upload speed to edge relays
+- **High availability**: Always respond to coordinator assignments
 - **Stable connection**: Avoid frequent disconnects
 
 **Tips:**
@@ -378,7 +377,7 @@ Current Epoch: 2026-W07 (Mon Feb 10 - Sun Feb 16)
 Epoch Progress: 4d 12h remaining
 
 Pending Rewards (Current Epoch):
- Bandwidth: 124.3 GB uploaded
+ Bandwidth: 124.3 GB pushed to relays
  Uptime: 98.2%
  Estimated Reward: 18.7 LYTH
 

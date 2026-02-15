@@ -10,15 +10,19 @@ Frequently asked questions about running a GRID seeder node.
 
 ### What is GRID?
 
-GRID (Good Reasonable Infrastructure Device) is MonoPlay's decentralized content delivery network. Run a GRID node to distribute games via BitTorrent and earn LYTH rewards.
+GRID (Good Reasonable Infrastructure Device) is MonoPlay's decentralized content delivery network. Run a GRID node to distribute encrypted game data through a relay-based CDN and earn LYTH rewards. Your node stores encrypted game chunks and pushes them to edge relays, where players download them. Seeders never have access to playable game files.
 
 ### Is GRID legal?
 
-Yes. GRID only distributes licensed, security-scanned games from verified publishers. It's not a generic torrent network and doesn't host pirated content.
+Yes. GRID only distributes licensed, security-scanned games from verified publishers. All content is encrypted — seeders store only encrypted chunks and cannot access, play, or extract game files. It is not a generic file-sharing network and does not host pirated content.
+
+### Can seeders pirate the games they store?
+
+No. All game content distributed through GRID is encrypted before it reaches seeder nodes. Seeders only store encrypted chunks that are useless without a decryption key. Only players who have purchased a valid license receive decryption keys from the MonoPlay platform. Seeders have no way to reconstruct or play the games they help distribute.
 
 ### Who can run a GRID node?
 
-Anyone with compatible hardware and internet connection. No KYC required, just a Monolythium wallet address.
+Anyone with compatible hardware and internet connection. Registration is done via email through the local dashboard setup wizard. A Monolythium wallet address is only needed as a payout address for rewards (configured separately in the web portal).
 
 ### Do I need to be a gamer to run a node?
 
@@ -44,7 +48,7 @@ Rewards distributed weekly (every Monday). Enable auto-claim for automatic payou
 
 Five main factors:
 
-1. **Bandwidth**: How much data you upload to players
+1. **Bandwidth**: How much data you upload to relays
 2. **Uptime**: Percentage of time online
 3. **Storage**: More games = more earning opportunities
 4. **Location**: Underserved regions earn bonuses
@@ -123,11 +127,11 @@ Or use router QoS to prioritize other traffic.
 
 ### Does GRID work behind CGNAT?
 
-Partially. You can download but won't accept incoming connections, significantly reducing earnings. Consider VPS deployment instead.
+Yes, fully. Since GRID only uses outbound connections to the coordinator and edge relays, CGNAT is not an issue. No inbound connections are required.
 
 ### Do I need to forward ports?
 
-Yes, port 6881 (TCP+UDP) must be forwarded to your node for optimal earnings. Nodes without port forwarding earn 50-70% less.
+No. GRID nodes only make outbound connections to the coordinator and edge relays. No inbound ports, no port forwarding, and no firewall configuration needed. Your node initiates all connections over standard outbound TLS.
 
 ### My ISP has a data cap. Is GRID suitable?
 
@@ -140,11 +144,11 @@ Monitor usage in dashboard to avoid overages.
 
 ### Does my ISP allow this?
 
-Most residential ISPs allow BitTorrent. Check your terms of service. Some business plans explicitly permit server hosting.
+Most residential ISPs have no issue with GRID traffic. Since GRID uses standard outbound TLS connections (similar to HTTPS), it appears as normal encrypted web traffic to your ISP.
 
 ### Will GRID trigger copyright notices from my ISP?
 
-No. GRID only distributes licensed content, not pirated material. However, ISPs may flag BitTorrent traffic generically. Use encrypted connections (enabled by default).
+No. GRID only distributes licensed content, not pirated material. All content is encrypted in transit and at rest, and your node does not make direct peer-to-peer connections with other users. Traffic flows through MonoPlay's relay infrastructure using standard encrypted TLS, which is indistinguishable from normal web traffic to your ISP.
 
 ## Storage
 
@@ -174,17 +178,7 @@ Auto-pruning deletes least popular games to make room for new content. No action
 
 ### Can I manually choose which games to seed?
 
-Yes, switch to manual mode:
-
-```yaml
-content:
- mode: "manual"
- whitelist:
- - "monolands-v2"
- - "pixel-quest"
-```
-
-But auto-mode generally earns more by selecting popular games dynamically.
+No. The coordinator assigns content to your node based on geographic demand, your available storage capacity, and network conditions. You can set storage and bandwidth limits, but game selection is automatic. This design prevents targeted downloading of specific titles and ensures optimal coverage across the network.
 
 ## Operation and Maintenance
 
@@ -198,7 +192,7 @@ Or enable automatic updates (default).
 
 ### How often should I check on my node?
 
-Weekly check recommended. Enable notifications for critical issues.
+Weekly check recommended. Enable notifications for critical issues. You can also monitor remotely through the grid.monoplay.xyz web portal.
 
 ### What if my node goes offline?
 
@@ -256,28 +250,28 @@ No. GRID runs in sandboxed Docker container with access only to config and data 
 
 ### Can my wallet be stolen?
 
-Your wallet address is public (used for reward payments). GRID never asks for private keys or seed phrases.
+Your payout wallet address is public (used for reward payments). GRID never asks for private keys or seed phrases. The wallet address is configured as a payout destination in the web portal and is not stored on the node itself.
 
 ### What data does GRID collect?
 
 **Collected**:
 - Bandwidth usage (aggregate)
 - Uptime statistics
-- Connected peers (count only)
+- Relay connection status
 - Games seeded
 
 **Not collected**:
-- Personal information
+- Personal information (beyond registration email)
 - Browsing history
 - Other files on your system
 
 ### Is my IP address public?
 
-Your IP is visible to peers you connect to (standard for BitTorrent). Not published on-chain.
+No. GRID uses a hub-and-spoke relay architecture. Your node connects outbound to the MonoPlay coordinator over encrypted TLS. Content is pushed to edge relays, and players download from those relays — not from your node directly. Your IP address is only known to the MonoPlay coordinator and is never exposed to players, other seeders, or the public.
 
 ### Can I run GRID over Tor or VPN?
 
-Technically yes, but not recommended. Tor is too slow; VPN may misreport location and reduce earnings.
+Since your IP is already protected by the relay architecture and is never exposed to other users, a VPN is not needed for privacy. You can use one if you want, but it is unnecessary and may reduce performance due to added latency. Tor is not recommended as it is too slow for meaningful bandwidth contribution.
 
 ## Troubleshooting
 
@@ -286,16 +280,16 @@ Technically yes, but not recommended. Tor is too slow; VPN may misreport locatio
 **Check**:
 1. Service is running: `docker ps` or `systemctl status grid-node`
 2. Network connectivity: `ping monoplay.xyz`
-3. Port 6881 is forwarded and accessible
-4. Firewall allows traffic
+3. Outbound TLS connections are not blocked by your firewall or ISP
+4. DNS resolution is working
 
 ### I'm not earning any rewards
 
 **Common causes**:
-- Port 6881 not accessible (test with portchecker.co)
-- Node offline/low uptime
-- Insufficient storage (no games seeded)
-- Wallet address not set or invalid
+- Node offline or low uptime
+- Insufficient storage (no games assigned)
+- Payout wallet address not set in web portal
+- Recently registered (allow 24 hours for first content assignment)
 
 Check dashboard for warnings.
 
@@ -308,7 +302,7 @@ Earnings depend on network usage (demand). Low weeks are normal. Compare your co
 **Check**:
 - Sufficient storage available
 - Network connectivity
-- No firewall blocking downloads
+- Outbound connections not blocked
 
 View logs: `docker logs grid-node -f`
 
@@ -324,7 +318,7 @@ Normal under heavy load. If persistent:
 ### Dashboard not accessible
 
 **Check**:
-- Port 8080 not blocked by firewall
+- Port 8080 not blocked by local firewall
 - Service is running
 - Access correct IP/hostname
 
@@ -334,7 +328,7 @@ Test: `curl http://localhost:8080/health`
 
 ### Can I run multiple nodes?
 
-Yes. Use different wallet addresses for each node. Distribute geographically for location bonuses.
+Yes. Use different email registrations and wallet addresses for each node. Distribute geographically for location bonuses.
 
 ### Can I customize the software?
 
@@ -342,24 +336,15 @@ Dashboard and CLI are open source and forkable. Core engine modifications not pe
 
 ### Does GRID support IPv6?
 
-Yes, dual-stack IPv4 + IPv6 supported. IPv6 is optional (most peers use IPv4).
+Yes, dual-stack IPv4 + IPv6 supported. IPv6 is optional.
 
 ### Can I integrate GRID with my monitoring system?
 
 Yes. Prometheus metrics available at `http://localhost:9090/metrics`. Grafana dashboard available.
 
-### What about UPnP?
-
-Enabled by default for automatic port forwarding. Disable if you manually forward ports:
-
-```yaml
-network:
- upnp_enabled: false
-```
-
 ### Can I seed non-MonoPlay content?
 
-No. GRID is exclusively for MonoPlay games. Use other torrent software for external content.
+No. GRID is exclusively for MonoPlay games. The coordinator only assigns verified, licensed content from the MonoPlay catalog.
 
 ## Support and Community
 
